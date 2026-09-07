@@ -291,7 +291,7 @@
                         <input type="text" id="itemName" placeholder="e.g., asset / equipment name">
                     </div>
                     <div class="form-group">
-                        <label>Item Category</label>
+                        <label>item category</label>
                         <select id="itemCategory">
                             <optgroup label="software, digital & IT (class 9)">
                                 <option>computer software applications & mobile apps</option>
@@ -479,6 +479,10 @@
                 fileInput.value = '';
             }
         }
+
+        (function clearOldTests() {
+            // Optional auto-clean helper if needed
+        })();
 
         function toggleView(target) {
             if (target === 'workspace') {
