@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bizave | life's tool at your hands</title>
+    <title>bizave | life's tool at your hands (class 9 software utility)</title>
     
     <!-- Firebase Cloud Database SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -34,11 +34,6 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-        }
-
-        .brand-section {
-            display: flex;
-            flex-direction: column;
         }
 
         .brand-section h1 {
@@ -178,11 +173,6 @@
             padding: 18px;
             margin-bottom: 14px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-            transition: transform 0.1s;
-        }
-
-        .problem-card:hover {
-            border-color: var(--cyan);
         }
 
         .problem-header {
@@ -249,78 +239,75 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header>
         <div class="brand-section">
             <h1>bizave</h1>
-            <p>life's tool at your hands</p>
+            <p>life's tool at your hands &bull; class 9 problem processing utility</p>
         </div>
         <div class="system-status">
             <span class="status-dot"></span>
-            <span>live database online</span>
+            <span>database synchronized</span>
         </div>
     </header>
 
     <div class="main-container">
-        
         <div class="workspace-grid">
             
-            <!-- LEFT PANEL: SUBMIT A PROBLEM OR SOLUTION -->
+            <!-- DATA INPUT & SOFTWARE MODULE -->
             <div class="panel">
-                <h3>submit problem & solution</h3>
+                <h3>software data ingestion module</h3>
                 <div class="form-group">
                     <label>problem / challenge title</label>
-                    <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
+                    <input type="text" id="problemTitle" placeholder="e.g., system diagnostics error #404">
                 </div>
                 <div class="form-group">
-                    <label>category</label>
+                    <label>software classification category</label>
                     <select id="problemCategory">
                         <option>technical & IT troubleshooting</option>
                         <option>software & application support</option>
                         <option>hardware & equipment repair</option>
                         <option>daily life & practical solutions</option>
-                        <option>general inquiries & advice</option>
+                        <option>system diagnostics & analysis</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>status</label>
+                    <label>processing status</label>
                     <select id="problemStatus">
                         <option>seeking solution</option>
-                        <option>solution found / resolved</option>
+                        <option>solution compiled / resolved</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>contact or contributor name</label>
-                    <input type="text" id="problemContact" placeholder="e.g., alex / +63 917 xxx xxxx">
+                    <label>operator / node id</label>
+                    <input type="text" id="problemContact" placeholder="operator-id / +63 917 xxx xxxx">
                 </div>
                 <div class="form-group">
-                    <label>describe the problem & proposed solution</label>
-                    <textarea id="problemDesc" rows="4" placeholder="share details about the problem and how it can be solved..."></textarea>
+                    <label>algorithmic parameters / description</label>
+                    <textarea id="problemDesc" rows="4" placeholder="enter challenge parameters and matching rules..."></textarea>
                 </div>
-                <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
+                <button class="btn-primary" onclick="submitProblem()">execute database record write</button>
             </div>
 
-            <!-- RIGHT PANEL: COMMUNITY PROBLEMS & SOLUTIONS FEED -->
+            <!-- QUERY ENGINE & REPORT EXPORT -->
             <div class="panel">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
-                    <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
-                    <button class="btn-export" onclick="exportCSV()">export records (.csv)</button>
+                    <h3 style="margin: 0; border: none; padding: 0;">real-time query & indexing engine</h3>
+                    <button class="btn-export" onclick="exportCSV()">export report (.csv)</button>
                 </div>
 
-                <!-- Search / Query Bar -->
                 <div style="margin-bottom: 16px;">
-                    <input type="text" id="searchQuery" placeholder="search problems, solutions, or categories..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
+                    <input type="text" id="searchQuery" placeholder="query indexed records and solutions..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
                 </div>
 
                 <div id="feedContainer">
-                    <p style="color: #94a3b8; font-size: 13px;">connecting to live database...</p>
+                    <p style="color: #94a3b8; font-size: 13px;">initializing database stream...</p>
                 </div>
             </div>
 
         </div>
 
         <footer>
-            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (software & digital data utilities).
+            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (software & digital data processing utilities).
         </footer>
     </div>
 
@@ -350,13 +337,13 @@
                 container.innerHTML = `
                     <div class="problem-card">
                         <div class="problem-header">
-                            <h4>welcome to bizave problem solving</h4>
+                            <h4>kernel_diagnostic_vector_v1</h4>
                             <span class="problem-badge">seeking solution</span>
                         </div>
-                        <div class="problem-meta">technical & IT troubleshooting &bull; posted by admin</div>
-                        <p>share your challenges here and connect with community-driven solutions. life's tool at your hands.</p>
+                        <div class="problem-meta">technical & IT troubleshooting &bull; operator-admin</div>
+                        <p>cloud rtdb synchronization protocol verified. system ready for problem-resolution input.</p>
                         <div class="problem-footer">
-                            <span class="solver-tag">contact: support@bizave.io</span>
+                            <span class="solver-tag">node: active</span>
                         </div>
                     </div>
                 `;
@@ -390,14 +377,14 @@
                     <div class="problem-meta">${item.category}</div>
                     <p>${item.desc}</p>
                     <div class="problem-footer">
-                        <span class="solver-tag">contributor: ${item.contact || 'anonymous'}</span>
+                        <span class="solver-tag">operator node: ${item.contact || 'system-node'}</span>
                     </div>
                 `;
                 container.appendChild(card);
             });
 
             if (count === 0) {
-                container.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
+                container.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px;">no matching records found in database.</p>`;
             }
         }
 
@@ -412,10 +399,10 @@
             const category = document.getElementById('problemCategory').value;
             const status = document.getElementById('problemStatus').value;
             const contact = document.getElementById('problemContact').value;
-            const desc = document.getElementById('problemDesc').value; // Fixed typo here!
+            const desc = document.getElementById('problemDesc').value;
 
             if (!title || !desc) {
-                alert("please provide a problem title and description.");
+                alert("error: required challenge title and parameters missing.");
                 return;
             }
 
@@ -435,11 +422,11 @@
 
         function exportCSV() {
             if (!globalCache || Object.keys(globalCache).length === 0) {
-                alert("no records to export.");
+                alert("no records available for export.");
                 return;
             }
 
-            let csv = 'id,title,category,status,contributor,description\n';
+            let csv = 'id,challenge_title,category,processing_status,operator_node,parameters\n';
             Object.keys(globalCache).forEach(key => {
                 const item = globalCache[key];
                 csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}"\n`;
@@ -449,7 +436,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'bizave_problem_solving_ledger.csv';
+            a.download = 'bizave_software_audit_report.csv';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
