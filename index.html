@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bizave | enterprise data processing & query engine (class 9)</title>
+    <title>bizave | life's tool at your hands (class 9 software suite)</title>
     
     <!-- Firebase Cloud Database SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -12,26 +12,26 @@
     <style>
         :root {
             --cyan: #00AEEF;
-            --dark-bg: #0f172a;
-            --panel-bg: #1e293b;
+            --dark-bg: #0b1329;
+            --panel-bg: #131b31;
             --text-light: #f8fafc;
             --text-muted: #94a3b8;
-            --border-color: #334155;
+            --border-color: #22304f;
             --green: #22c55e;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+            font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
             background-color: var(--dark-bg);
             color: var(--text-light);
         }
 
         header {
-            background: #090d16;
+            background: #080e1d;
             border-bottom: 2px solid var(--cyan);
-            padding: 12px 25px;
+            padding: 14px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,23 +40,24 @@
         .brand-section {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .brand-titles h1 {
             margin: 0;
-            font-size: 16px;
+            font-size: 18px;
             color: var(--cyan);
-            font-weight: 700;
+            font-weight: 800;
             text-transform: lowercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .brand-titles p {
-            margin: 2px 0 0 0;
-            font-size: 10px;
+            margin: 3px 0 0 0;
+            font-size: 11px;
             color: var(--text-muted);
             text-transform: lowercase;
+            letter-spacing: 0.5px;
         }
 
         .hud-metrics {
@@ -101,7 +102,7 @@
         }
 
         .hud-card .hud-value {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--cyan);
         }
@@ -118,7 +119,7 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             padding: 16px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
 
         .panel h3 {
@@ -151,7 +152,7 @@
             border: 1px solid var(--border-color);
             border-radius: 3px;
             font-size: 12px;
-            background: #0b1120;
+            background: #080e1d;
             color: var(--text-light);
             font-family: monospace;
             text-transform: lowercase;
@@ -159,7 +160,7 @@
 
         .btn-action {
             background: var(--cyan);
-            color: #0b1120;
+            color: #080e1d;
             border: none;
             padding: 10px;
             border-radius: 3px;
@@ -178,7 +179,7 @@
         }
 
         .btn-secondary {
-            background: #334155;
+            background: #22304f;
             color: var(--text-light);
             border: none;
             padding: 6px 10px;
@@ -189,29 +190,34 @@
             text-transform: lowercase;
         }
 
+        .btn-secondary:hover {
+            background: var(--cyan);
+            color: #080e1d;
+        }
+
         /* --- TERMINAL CONSOLE --- */
         .terminal-box {
-            background: #090d16;
+            background: #080e1d;
             border: 1px solid var(--border-color);
             border-radius: 3px;
             padding: 10px;
             font-size: 10px;
             color: #38bdf8;
-            height: 180px;
+            height: 190px;
             overflow-y: auto;
             margin-top: 10px;
             line-height: 1.4;
         }
 
-        /* --- DATABASE FEED CARDS --- */
+        /* --- RECORD CARDS --- */
         .query-toolbar {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 15px;
         }
 
         .record-card {
-            background: #0b1120;
+            background: #080e1d;
             border: 1px solid var(--border-color);
             border-radius: 3px;
             padding: 12px;
@@ -227,7 +233,7 @@
             object-fit: cover;
             border-radius: 2px;
             border: 1px solid var(--border-color);
-            background: #1e293b;
+            background: #131b31;
         }
 
         .record-details {
@@ -268,18 +274,18 @@
 </head>
 <body>
 
-    <!-- HEADER / SYSTEM BAR -->
+    <!-- HEADER / BRAND IDENTITY -->
     <header>
         <div class="brand-section">
             <div class="brand-titles">
-                <h1>bizave [core v3.8]</h1>
-                <p>class 9 distributed database & algorithm query engine</p>
+                <h1>bizave</h1>
+                <p>life's tool at your hands &bull; class 9 database query engine</p>
             </div>
         </div>
         <div class="hud-metrics">
             <span>kernel: <strong>stable-x64</strong></span>
-            <span>auth-node: <strong>operator-01</strong></span>
-            <span>status: <strong style="color:var(--green)">active</strong></span>
+            <span>session: <strong>operator-admin</strong></span>
+            <span>status: <strong style="color:var(--green)">online</strong></span>
         </div>
     </header>
 
@@ -289,7 +295,7 @@
         <div class="telemetry-hud">
             <div class="hud-card">
                 <label>database connection state</label>
-                <div class="hud-value" id="hudState">syncing (firebase)</div>
+                <div class="hud-value" id="hudState">syncing (firebase rtdb)</div>
             </div>
             <div class="hud-card">
                 <label>active index count</label>
@@ -297,11 +303,11 @@
             </div>
             <div class="hud-card">
                 <label>query latency</label>
-                <div class="hud-value">14ms</div>
+                <div class="hud-value">12ms</div>
             </div>
             <div class="hud-card">
-                <label>algorithm throughput</label>
-                <div class="hud-value">99.9% efficiency</div>
+                <label>algorithm efficiency</label>
+                <div class="hud-value">99.9% optimized</div>
             </div>
         </div>
 
@@ -353,22 +359,22 @@
             <div class="panel">
                 <h3>[02] real-time query & indexing engine</h3>
                 <div class="query-toolbar">
-                    <input type="text" id="searchQuery" placeholder="query indexed records..." onkeyup="filterLedger()" style="flex-grow:p; padding: 8px; background:#0b1120; border:1px solid var(--border-color); color:white; font-family:monospace; font-size:12px; border-radius:3px; text-transform:lowercase;">
-                    <button class="btn-secondary" onclick="exportDatabaseCSV()">export csv</button>
-                    <button class="btn-secondary" onclick="exportJSON()">export json</button>
+                    <input type="text" id="searchQuery" placeholder="query indexed records..." onkeyup="filterLedger()" style="flex-grow:1; padding: 8px; background:#080e1d; border:1px solid var(--border-color); color:white; font-family:monospace; font-size:12px; border-radius:3px; text-transform:lowercase;">
+                    <button class="btn-secondary" onclick="exportDatabaseCSV()">csv</button>
+                    <button class="btn-secondary" onclick="exportJSON()">json</button>
                 </div>
 
                 <div id="ledgerFeed" style="max-height: 480px; overflow-y: auto;">
-                    <p style="color: var(--text-muted); font-size: 11px;">initializing query stream...</p>
+                    <p style="color: var(--text-muted); font-size: 11px; text-transform: lowercase;">initializing query stream...</p>
                 </div>
             </div>
 
             <!-- PANEL 3: SYSTEM CONSOLE & LOGS -->
             <div class="panel">
                 <h3>[03] kernel console logs</h3>
-                <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px;">live system telemetry & socket stream:</p>
+                <p style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px; text-transform: lowercase;">live telemetry socket stream:</p>
                 <div class="terminal-box" id="terminalLog">
-                    [00:01] kernel initialized...<br>
+                    [00:01] bizave core initialized...<br>
                     [00:02] mounting firebase rtdb socket...<br>
                     [00:03] security handshake verified.<br>
                     [00:04] waiting for operator command...<br>
@@ -382,7 +388,7 @@
         </div>
 
         <footer>
-            &copy; 2026 bizave software corporation. registered trademark under class 9 (computer software, database utilities, and digital data processing systems).
+            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (computer software and digital data processing systems).
         </footer>
     </div>
 
@@ -470,7 +476,7 @@
             });
 
             if (matchCount === 0) {
-                ledger.innerHTML = `<p style="color: var(--text-muted); font-size: 11px; text-align: center; padding: 20px;">no matching data vectors found.</p>`;
+                ledger.innerHTML = `<p style="color: var(--text-muted); font-size: 11px; text-align: center; padding: 20px; text-transform: lowercase;">no matching data vectors found.</p>`;
             }
         }
 
@@ -552,7 +558,7 @@
 
         function runDiagnostics() {
             logToTerminal('running kernel integrity check...');
-            setTimeout(() => logToTerminal('rtdb socket latency: 14ms (optimal).'), 400);
+            setTimeout(() => logToTerminal('rtdb socket latency: 12ms (optimal).'), 400);
             setTimeout(() => logToTerminal('memory allocation: stable (12.4 mb).'), 800);
             setTimeout(() => logToTerminal('diagnostics complete: zero errors detected.'), 1200);
         }
