@@ -325,7 +325,6 @@
     </div>
 
     <script>
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCuHLmUpAUcfjHMz6KciWD5bUfvPnKnKHM",
             authDomain: "bizave-1cb28.firebaseapp.com",
@@ -342,7 +341,6 @@
 
         let globalCache = {};
 
-        // Listen for Real-Time Updates from Firebase
         problemsRef.on('value', (snapshot) => {
             const data = snapshot.val();
             const container = document.getElementById('feedContainer');
@@ -414,7 +412,7 @@
             const category = document.getElementById('problemCategory').value;
             const status = document.getElementById('problemStatus').value;
             const contact = document.getElementById('problemContact').value;
-            const desc = document.getElementById('problemDesc').value;
+            const desc = document.getElementById('problemDesc5').value || document.getElementById('problemDesc').value;
 
             if (!title || !desc) {
                 alert("please provide a problem title and description.");
@@ -430,7 +428,6 @@
                 timestamp: Date.now()
             });
 
-            // Reset form fields
             document.getElementById('problemTitle').value = '';
             document.getElementById('problemContact').value = '';
             document.getElementById('problemDesc').value = '';
