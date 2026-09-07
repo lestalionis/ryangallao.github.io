@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bizave | life's tool at your hands (class 9 software utility)</title>
+    <title>bizave | life's tool at your hands</title>
     
     <!-- Firebase Cloud Database SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -16,6 +16,7 @@
             --light-bg: #f8fafc;
             --border-color: #cbd5e1;
             --green: #16a34a;
+            --pro-gold: #d97706;
         }
 
         body {
@@ -92,6 +93,7 @@
             border-radius: 8px;
             padding: 24px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
         }
 
         .panel h3 {
@@ -148,6 +150,23 @@
 
         .btn-primary:hover {
             background: #0095cc;
+        }
+
+        .btn-pro {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            width: 100%;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-pro:hover {
+            opacity: 0.9;
         }
 
         .btn-export {
@@ -227,6 +246,28 @@
             font-weight: 600;
         }
 
+        .pro-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .pro-box h4 {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            color: #b45309;
+            font-weight: 700;
+        }
+
+        .pro-box p {
+            margin: 0 0 12px 0;
+            font-size: 12px;
+            color: #78350f;
+            line-height: 1.4;
+        }
+
         footer {
             text-align: center;
             margin-top: 50px;
@@ -242,72 +283,84 @@
     <header>
         <div class="brand-section">
             <h1>bizave</h1>
-            <p>life's tool at your hands &bull; class 9 problem processing utility</p>
+            <p>life's tool at your hands</p>
         </div>
         <div class="system-status">
             <span class="status-dot"></span>
-            <span>database synchronized</span>
+            <span id="licenseStatusText">standard license active</span>
         </div>
     </header>
 
     <div class="main-container">
         <div class="workspace-grid">
             
-            <!-- DATA INPUT & SOFTWARE MODULE -->
-            <div class="panel">
-                <h3>software data ingestion module</h3>
-                <div class="form-group">
-                    <label>problem / challenge title</label>
-                    <input type="text" id="problemTitle" placeholder="e.g., system diagnostics error #404">
+            <!-- LEFT COLUMN: SUBMISSION & SOFTWARE LICENSING -->
+            <div>
+                <div class="panel">
+                    <h3>submit problem & solution</h3>
+                    <div class="form-group">
+                        <label>problem / challenge title</label>
+                        <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
+                    </div>
+                    <div class="form-group">
+                        <label>category</label>
+                        <select id="problemCategory">
+                            <option>technical & IT troubleshooting</option>
+                            <option>software & application support</option>
+                            <option>hardware & equipment repair</option>
+                            <option>daily life & practical solutions</option>
+                            <option>general inquiries & advice</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>status</label>
+                        <select id="problemStatus">
+                            <option>seeking solution</option>
+                            <option>solution found / resolved</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>contact or contributor name</label>
+                        <input type="text" id="problemContact" placeholder="e.g., alex / +63 917 xxx xxxx">
+                    </div>
+                    <div class="form-group">
+                        <label>describe the problem & proposed solution</label>
+                        <textarea id="problemDesc" rows="4" placeholder="share details about the problem and how it can be solved..."></textarea>
+                    </div>
+                    <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
                 </div>
-                <div class="form-group">
-                    <label>software classification category</label>
-                    <select id="problemCategory">
-                        <option>technical & IT troubleshooting</option>
-                        <option>software & application support</option>
-                        <option>hardware & equipment repair</option>
-                        <option>daily life & practical solutions</option>
-                        <option>system diagnostics & analysis</option>
-                    </select>
+
+                <!-- SOFTWARE MONETIZATION MODULE (CLASS 9 ECONOMIC BENEFIT) -->
+                <div class="pro-box">
+                    <h4>bizave pro software license</h4>
+                    <p>upgrade to unlock advanced automated matching algorithms, priority cloud syncing, and enterprise data report generation.</p>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <input type="text" id="licenseKeyInput" placeholder="enter activation key (e.g., BIZ-PRO-2026)">
+                    </div>
+                    <button class="btn-pro" onclick="activateProLicense()">activate pro software tier (₱499/mo)</button>
                 </div>
-                <div class="form-group">
-                    <label>processing status</label>
-                    <select id="problemStatus">
-                        <option>seeking solution</option>
-                        <option>solution compiled / resolved</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>operator / node id</label>
-                    <input type="text" id="problemContact" placeholder="operator-id / +63 917 xxx xxxx">
-                </div>
-                <div class="form-group">
-                    <label>algorithmic parameters / description</label>
-                    <textarea id="problemDesc" rows="4" placeholder="enter challenge parameters and matching rules..."></textarea>
-                </div>
-                <button class="btn-primary" onclick="submitProblem()">execute database record write</button>
             </div>
 
-            <!-- QUERY ENGINE & REPORT EXPORT -->
+            <!-- RIGHT COLUMN: FEED & ENTERPRISE DATA EXPORT -->
             <div class="panel">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
-                    <h3 style="margin: 0; border: none; padding: 0;">real-time query & indexing engine</h3>
-                    <button class="btn-export" onclick="exportCSV()">export report (.csv)</button>
+                    <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
+                    <button class="btn-export" onclick="exportEnterpriseCSV()">export enterprise dataset (.csv)</button>
                 </div>
 
                 <div style="margin-bottom: 16px;">
-                    <input type="text" id="searchQuery" placeholder="query indexed records and solutions..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
+                    <input type="text" id="searchQuery" placeholder="search problems, solutions, or categories..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
                 </div>
 
                 <div id="feedContainer">
-                    <p style="color: #94a3b8; font-size: 13px;">initializing database stream...</p>
+                    <p style="color: #94a3b8; font-size: 13px;">connecting to live database...</p>
                 </div>
             </div>
 
         </div>
 
         <footer>
-            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (software & digital data processing utilities).
+            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (software & digital data utilities).
         </footer>
     </div>
 
@@ -327,6 +380,7 @@
         const problemsRef = db.ref('bizave_problems');
 
         let globalCache = {};
+        let isProActive = false;
 
         problemsRef.on('value', (snapshot) => {
             const data = snapshot.val();
@@ -337,13 +391,13 @@
                 container.innerHTML = `
                     <div class="problem-card">
                         <div class="problem-header">
-                            <h4>kernel_diagnostic_vector_v1</h4>
+                            <h4>welcome to bizave problem solving</h4>
                             <span class="problem-badge">seeking solution</span>
                         </div>
-                        <div class="problem-meta">technical & IT troubleshooting &bull; operator-admin</div>
-                        <p>cloud rtdb synchronization protocol verified. system ready for problem-resolution input.</p>
+                        <div class="problem-meta">technical & IT troubleshooting &bull; posted by admin</div>
+                        <p>share your challenges here and connect with community-driven solutions. life's tool at your hands.</p>
                         <div class="problem-footer">
-                            <span class="solver-tag">node: active</span>
+                            <span class="solver-tag">contact: support@bizave.io</span>
                         </div>
                     </div>
                 `;
@@ -377,14 +431,14 @@
                     <div class="problem-meta">${item.category}</div>
                     <p>${item.desc}</p>
                     <div class="problem-footer">
-                        <span class="solver-tag">operator node: ${item.contact || 'system-node'}</span>
+                        <span class="solver-tag">contributor: ${item.contact || 'anonymous'}</span>
                     </div>
                 `;
                 container.appendChild(card);
             });
 
             if (count === 0) {
-                container.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px;">no matching records found in database.</p>`;
+                container.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
             }
         }
 
@@ -402,7 +456,7 @@
             const desc = document.getElementById('problemDesc').value;
 
             if (!title || !desc) {
-                alert("error: required challenge title and parameters missing.");
+                alert("please provide a problem title and description.");
                 return;
             }
 
@@ -420,23 +474,36 @@
             document.getElementById('problemDesc').value = '';
         }
 
-        function exportCSV() {
+        function activateProLicense() {
+            const key = document.getElementById('licenseKeyInput').value.trim();
+            if (key === "" || key.toUpperCase() === "BIZ-PRO-2026") {
+                isProActive = true;
+                document.getElementById('licenseStatusText').innerText = 'bizave pro license active (commercial tier)';
+                document.getElementById('licenseStatusText').style.color = '#d97706';
+                alert("success: pro software license activated. advanced query and compiled analytics unlocked.");
+            } else {
+                alert("invalid software license activation key.");
+            }
+        }
+
+        function exportEnterpriseCSV() {
             if (!globalCache || Object.keys(globalCache).length === 0) {
-                alert("no records available for export.");
+                alert("no records available for dataset export.");
                 return;
             }
 
-            let csv = 'id,challenge_title,category,processing_status,operator_node,parameters\n';
+            let csv = 'record_id,challenge_title,category,resolution_status,contributor_node,parameters_description,license_tier\n';
             Object.keys(globalCache).forEach(key => {
                 const item = globalCache[key];
-                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}"\n`;
+                const tier = isProActive ? 'PRO_COMMERCIAL' : 'STANDARD';
+                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}","${tier}"\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'bizave_software_audit_report.csv';
+            a.download = 'bizave_commercial_dataset_report.csv';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
