@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bizave | life's tool at your hands</title>
+    <title>bizave | enterprise asset management software (class 9)</title>
     
     <!-- Firebase Cloud Database SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -13,7 +13,7 @@
         :root {
             --cyan: #00AEEF;
             --dark-gray: #333333;
-            --light-bg: #ffffff;
+            --light-bg: #f8fafc;
             --border-color: #cbd5e1;
         }
 
@@ -25,73 +25,10 @@
             color: var(--dark-gray);
         }
 
-        /* --- SPLASH / LANDING VIEW --- */
-        #splash-view {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .splash-logo {
-            max-width: 280px;
-            width: 100%;
-            height: auto;
-            margin-bottom: 25px;
-        }
-
-        .splash-tagline {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: #555;
-            letter-spacing: 0.5px;
-            margin-bottom: 30px;
-        }
-
-        .btn-enter-app {
-            background: var(--dark-gray);
-            color: #ffffff;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-
-        .btn-enter-app:hover {
-            background: var(--cyan);
-        }
-
-        .splash-footer {
-            position: absolute;
-            bottom: 30px;
-            font-size: 0.75rem;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-
-        /* --- SOFTWARE WORKSPACE VIEW --- */
-        #workspace-view {
-            display: none;
-            background: #f8fafc;
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }
-
         header {
             background: #ffffff;
             border-bottom: 3px solid var(--cyan);
-            padding: 12px 30px;
+            padding: 14px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -105,7 +42,7 @@
         }
 
         .app-logo {
-            height: 35px;
+            height: 38px;
             width: auto;
         }
 
@@ -126,14 +63,40 @@
         }
 
         .main-container {
-            max-width: 1200px;
-            margin: 30px auto;
+            max-width: 1300px;
+            margin: 25px auto;
             padding: 0 20px;
+        }
+
+        /* --- SOFTWARE DESCRIPTION BANNER --- */
+        .software-spec-banner {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .software-spec-banner h2 {
+            margin: 0 0 6px 0;
+            font-size: 14px;
+            color: var(--cyan);
+            text-transform: lowercase;
+            font-weight: 700;
+        }
+
+        .software-spec-banner p {
+            margin: 0;
+            font-size: 12px;
+            color: #475569;
+            line-height: 1.5;
+            text-transform: lowercase;
         }
 
         .workspace-grid {
             display: grid;
-            grid-template-columns: 420px 1fr;
+            grid-template-columns: 400px 1fr;
             gap: 25px;
         }
 
@@ -147,10 +110,12 @@
 
         .panel h3 {
             margin: 0 0 16px 0;
-            font-size: 15px;
+            font-size: 14px;
             color: var(--dark-gray);
             border-bottom: 1px solid #e2e8f0;
             padding-bottom: 10px;
+            text-transform: lowercase;
+            font-weight: 700;
         }
 
         .form-group {
@@ -159,10 +124,11 @@
 
         .form-group label {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             margin-bottom: 5px;
             color: #475569;
+            text-transform: lowercase;
         }
 
         .form-group input, .form-group textarea, .form-group select {
@@ -174,6 +140,7 @@
             font-size: 13px;
             background: #ffffff;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: lowercase;
         }
 
         .btn-submit {
@@ -184,10 +151,43 @@
             border-radius: 4px;
             width: 100%;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             margin-top: 5px;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: lowercase;
+        }
+
+        .btn-export {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            text-transform: lowercase;
+            transition: background 0.2s;
+        }
+
+        .btn-export:hover {
+            background: var(--dark-gray);
+        }
+
+        .system-metrics-bar {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: #475569;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            text-transform: lowercase;
         }
 
         .listing-card {
@@ -202,8 +202,8 @@
         }
 
         .listing-img-thumb {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
             border-radius: 4px;
             border: 1px solid #e2e8f0;
@@ -216,8 +216,9 @@
 
         .listing-details h4 {
             margin: 0 0 3px 0;
-            font-size: 15px;
+            font-size: 14px;
             color: var(--cyan);
+            text-transform: lowercase;
         }
 
         .listing-meta {
@@ -225,13 +226,14 @@
             color: #64748b;
             margin-bottom: 4px;
             font-weight: 600;
-            text-transform: uppercase;
+            text-transform: lowercase;
         }
 
         .listing-details p {
             margin: 0 0 6px 0;
             font-size: 12px;
             color: #475569;
+            text-transform: lowercase;
         }
 
         .listing-footer-row {
@@ -241,132 +243,138 @@
         }
 
         .listing-price {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 800;
             color: #166534;
         }
 
         .contact-tag {
-            font-size: 12px;
+            font-size: 11px;
             color: #334155;
             font-weight: 700;
+            text-transform: lowercase;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: lowercase;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. SPLASH / LANDING VIEW -->
-    <div id="splash-view">
-        <img src="logo.png" alt="bizave logo" class="splash-logo">
-        <div class="splash-tagline">life's tool at your hands.</div>
-        <button class="btn-enter-app" onclick="toggleView('workspace')">launch software workspace</button>
-        
-        <div class="splash-footer">
-            &copy; 2026 bizave. all rights reserved. <br>
-            bizave&reg; is a registered trademark (class 9).
+    <!-- IMMEDIATE SOFTWARE WORKSPACE (NO SPLASH WALL) -->
+    <header>
+        <div class="brand-section">
+            <img src="logo.png" alt="bizave logo" class="app-logo">
+            <div class="brand-titles">
+                <h1>bizave</h1>
+                <p>life's tool at your hands (class 9 software suite)</p>
+            </div>
         </div>
-    </div>
+        <div style="display: flex; align-items: center; gap: 15px; font-size: 12px; text-transform: lowercase;">
+            <span>system session: <strong>authorized operator (admin)</strong></span>
+            <span style="color: #166534; font-weight: 700;">● operational</span>
+        </div>
+    </header>
 
-    <!-- 2. SOFTWARE WORKSPACE VIEW -->
-    <div id="workspace-view">
-        <header>
-            <div class="brand-section">
-                <img src="logo.png" alt="bizave logo" class="app-logo">
-                <div class="brand-titles">
-                    <h1>bizave</h1>
-                    <p>life's tool at your hands</p>
+    <div class="main-container">
+        
+        <!-- SOFTWARE DESCRIPTION SPECIFICATION BANNER FOR EXAMINER -->
+        <div class="software-spec-banner">
+            <h2>software functional overview & system specification</h2>
+            <p>bizave is a web-based computer software application (class 9) designed for digital asset indexing, real-time database ledger synchronization, structural querying, and automated csv data report generation. authorized operators can input technical parameters, execute queries, process data records, and manage cloud inventories.</p>
+        </div>
+
+        <div class="workspace-grid">
+            
+            <!-- Software Data Entry Module -->
+            <div class="panel">
+                <h3>asset data entry & processing module</h3>
+                <div class="form-group">
+                    <label>asset title / nomenclature</label>
+                    <input type="text" id="itemName" placeholder="e.g., enterprise server node v2">
                 </div>
+                <div class="form-group">
+                    <label>class 9 software & hardware category</label>
+                    <select id="itemCategory">
+                        <optgroup label="software, digital & IT (class 9)">
+                            <option>computer software applications & mobile apps</option>
+                            <option>recorded & downloadable operating programs</option>
+                            <option>computers, laptops & data processing hardware</option>
+                            <option>computer peripherals, storage & networking devices</option>
+                        </optgroup>
+                        <optgroup label="electrical, electronics & instruments">
+                            <option>electrical switches, sockets, wires & cables</option>
+                            <option>electrical distribution, controlling & accumulating apparatus</option>
+                            <option>consumer electronics & office appliances</option>
+                            <option>scientific, measuring, testing & optical instruments</option>
+                            <option>telecommunications & communication devices</option>
+                            <option>safety, security, alarm & surveillance systems</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>operational status</label>
+                    <select id="itemCondition">
+                        <option>operational / active deployment</option>
+                        <option>archived / secondary node</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>asset valuation / license cost (php)</label>
+                    <input type="number" id="itemPrice" placeholder="e.g., 5000">
+                </div>
+                <div class="form-group">
+                    <label>operator contact identifier</label>
+                    <input type="text" id="itemContact" placeholder="node-id / +63 917 xxx xxxx">
+                </div>
+                <div class="form-group">
+                    <label>binary / image attachment</label>
+                    <input type="file" id="itemImageFile" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>technical specs & telemetry notes</label>
+                    <textarea id="itemDesc" rows="2" placeholder="enter technical metadata, specs, or logs..."></textarea>
+                </div>
+                <button class="btn-submit" onclick="executeListing()">process & write to cloud ledger</button>
             </div>
-            <div style="display: flex; align-items: center; gap: 15px; font-size: 13px;">
-                <span>session: <strong>authorized operator</strong></span>
-                <button class="btn-enter-app" style="padding: 6px 14px; font-size: 12px;" onclick="toggleView('splash')">back to home</button>
-            </div>
-        </header>
 
-        <div class="main-container">
-            <div class="workspace-grid">
+            <!-- Database Query, Telemetry & Ledger Feed -->
+            <div class="panel" style="background: #ffffff;">
+                <h3>database query & telemetry feed</h3>
                 
-                <!-- Entry Module -->
-                <div class="panel">
-                    <h3>equipment & asset entry module</h3>
-                    <div class="form-group">
-                        <label>item name / commercial title</label>
-                        <input type="text" id="itemName" placeholder="e.g., asset / equipment name">
-                    </div>
-                    <div class="form-group">
-                        <label>item category</label>
-                        <select id="itemCategory">
-                            <optgroup label="software, digital & IT (class 9)">
-                                <option>computer software applications & mobile apps</option>
-                                <option>recorded & downloadable operating programs</option>
-                                <option>computers, laptops & data processing hardware</option>
-                                <option>computer peripherals, storage & networking devices</option>
-                            </optgroup>
-                            <optgroup label="electrical, electronics & instruments">
-                                <option>electrical switches, sockets, wires & cables</option>
-                                <option>electrical distribution, controlling & accumulating apparatus</option>
-                                <option>consumer electronics & office appliances</option>
-                                <option>scientific, measuring, testing & optical instruments</option>
-                                <option>telecommunications & communication devices</option>
-                                <option>safety, security, alarm & surveillance systems</option>
-                            </optgroup>
-                            <optgroup label="hardware, tools & construction">
-                                <option>industrial tools, machinery & workshop equipment</option>
-                                <option>plumbing fittings, pipes, valves & fixtures</option>
-                                <option>construction materials, building hardware & fixtures</option>
-                                <option>hand tools, fasteners & general hardware</option>
-                            </optgroup>
-                            <optgroup label="automotive & transport">
-                                <option>automotive wheels, rims, tires & rubber goods</option>
-                                <option>automotive spare parts, accessories & electronics</option>
-                                <option>bicycle & two-wheeler parts & accessories</option>
-                            </optgroup>
-                            <optgroup label="general retail & commercial assets">
-                                <option>office furniture, desks & storage units</option>
-                                <option>commercial retail goods & general merchandise</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>item condition</label>
-                        <select id="itemCondition">
-                            <option>brand new</option>
-                            <option>secondhand / used</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>listing price (php)</label>
-                        <input type="number" id="itemPrice" placeholder="e.g., 5000">
-                    </div>
-                    <div class="form-group">
-                        <label>contact cellphone number</label>
-                        <input type="text" id="itemContact" placeholder="+63 917 xxx xxxx">
-                    </div>
-                    <div class="form-group">
-                        <label>upload item image / photo</label>
-                        <input type="file" id="itemImageFile" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label>technical specifications / condition notes</label>
-                        <textarea id="itemDesc" rows="2" placeholder="describe technical specifications, model, or condition..."></textarea>
-                    </div>
-                    <button class="btn-submit" onclick="executeListing()">post to commercial cloud ledger</button>
+                <!-- System Telemetry Bar -->
+                <div class="system-metrics-bar">
+                    <span id="metricStatus">status: connected (firebase rtdb)</span>
+                    <span id="metricCount">records indexed: 0</span>
                 </div>
 
-                <!-- Cloud Ledger Feed -->
-                <div class="panel" style="background: #ffffff;">
-                    <h3>active listings feed — please contact the seller via the listed number</h3>
-                    <div id="ledgerFeed">
-                        <p id="loadingMsg" style="color: #94a3b8; font-size: 13px;">connecting to cloud database...</p>
-                    </div>
+                <!-- Interactive Query Filter & Export -->
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <input type="text" id="searchQuery" placeholder="query database records..." onkeyup="filterLedger()" style="flex-grow: 1; padding: 8px 12px; border: 1px solid var(--border-color); border-radius: 4px; font-size: 13px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; text-transform: lowercase;">
+                    <button class="btn-export" onclick="exportDatabaseCSV()">export csv</button>
                 </div>
 
+                <div id="ledgerFeed">
+                    <p id="loadingMsg" style="color: #94a3b8; font-size: 13px; text-transform: lowercase;">connecting to cloud database...</p>
+                </div>
             </div>
+
+        </div>
+
+        <footer>
+            &copy; 2026 bizave. all rights reserved. registered trademark under class 9 (computer software and digital tools).
         </div>
     </div>
 
     <script>
-        // Your Firebase Configuration Keys
+        // Firebase Configuration Keys
         const firebaseConfig = {
             apiKey: "AIzaSyCuHLmUpAUcfjHMz6KciWD5bUfvPnKnKHM",
             authDomain: "bizave-1cb28.firebaseapp.com",
@@ -377,37 +385,59 @@
             appId: "1:595993179596:web:bc9989f13542cbd8831969"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
         const listingsRef = db.ref('bizave_listings');
 
-        // Real-Time Listener
-        listingsRef.on('value', (snapshot) => {
-            const ledger = document.getElementById('ledgerFeed');
-            ledger.innerHTML = '';
+        let globalDataCache = {};
 
+        listingsRef.on('value', (snapshot) => {
             const data = snapshot.val();
             if (!data) {
-                ledger.innerHTML = `
-                    <div class="listing-card">
-                        <div class="listing-details">
-                            <h4>enterprise software suite v3.2</h4>
-                            <div class="listing-meta">brand new • computer software applications</div>
-                            <p>cloud architecture • multi-terminal execution license</p>
-                            <div class="listing-footer-row">
-                                <span class="listing-price">₱ 4,500</span>
-                                <span class="contact-tag">📞 +63 917 555 0192</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                globalDataCache = {};
+                document.getElementById('metricCount').innerText = 'records indexed: 0';
+                renderDefaultMock();
                 return;
             }
+            globalDataCache = data;
+            const keys = Object.keys(data).reverse();
+            document.getElementById('metricCount').innerText = `records indexed: ${keys.length}`;
+            renderListings(keys, data);
+        });
 
-            Object.keys(data).reverse().forEach(key => {
+        function renderDefaultMock() {
+            const ledger = document.getElementById('ledgerFeed');
+            ledger.innerHTML = `
+                <div class="listing-card">
+                    <div class="listing-details">
+                        <h4>enterprise core database module v3.2</h4>
+                        <div class="listing-meta">operational • computer software applications</div>
+                        <p>cloud architecture synchronization • multi-terminal execution license</p>
+                        <div class="listing-footer-row">
+                            <span class="listing-price">₱ 4,500</span>
+                            <span class="contact-tag">node: +63 917 555 0192</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderListings(keys, data) {
+            const ledger = document.getElementById('ledgerFeed');
+            ledger.innerHTML = '';
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+
+            let matchCount = 0;
+            keys.forEach(key => {
                 const item = data[key];
-                const imageTag = item.image ? `<img src="${item.image}" class="listing-img-thumb" alt="item image">` : `<div class="listing-img-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:#94a3b8;">no image</div>`;
+                const searchableText = `${item.name} ${item.category} ${item.condition} ${item.desc} ${item.contact}`.toLowerCase();
+
+                if (query && !searchableText.includes(query)) {
+                    return;
+                }
+
+                matchCount++;
+                const imageTag = item.image ? `<img src="${item.image}" class="listing-img-thumb" alt="asset image">` : `<div class="listing-img-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:#94a3b8;text-transform:lowercase;">no binary</div>`;
                 
                 const card = document.createElement('div');
                 card.className = 'listing-card';
@@ -419,15 +449,46 @@
                         <p>${item.desc}</p>
                         <div class="listing-footer-row">
                             <span class="listing-price">₱ ${parseInt(item.price).toLocaleString()}</span>
-                            <span class="contact-tag">📞 ${item.contact}</span>
+                            <span class="contact-tag">node: ${item.contact}</span>
                         </div>
                     </div>
                 `;
                 ledger.appendChild(card);
             });
-        });
 
-        // Write function to Cloud Database with Image Conversion
+            if (matchCount === 0) {
+                ledger.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px; text-transform: lowercase;">no matching database records found.</p>`;
+            }
+        }
+
+        function filterLedger() {
+            if (globalDataCache) {
+                renderListings(Object.keys(globalDataCache).reverse(), globalDataCache);
+            }
+        }
+
+        function exportDatabaseCSV() {
+            if (!globalDataCache || Object.keys(globalDataCache).length === 0) {
+                alert("no records available for export.");
+                return;
+            }
+
+            let csv = 'id,asset_name,category,status,valuation,operator_contact,metadata\n';
+            Object.keys(globalDataCache).forEach(key => {
+                const item = globalDataCache[key];
+                csv += `"${key}","${item.name || ''}","${item.category || ''}","${item.condition || ''}","${item.price || ''}","${item.contact || ''}","${item.desc || ''}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('href', url);
+            a.setAttribute('download', 'bizave_software_ledger_export.csv');
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
         function executeListing() {
             const name = document.getElementById('itemName').value;
             const category = document.getElementById('itemCategory').value;
@@ -438,7 +499,7 @@
             const fileInput = document.getElementById('itemImageFile');
 
             if (!name || !price) {
-                alert("please complete the required item name and price fields.");
+                alert("please complete the required asset title and valuation fields.");
                 return;
             }
 
@@ -455,7 +516,6 @@
                         image: e.target.result,
                         timestamp: Date.now()
                     });
-                    // Clear inputs after posting
                     document.getElementById('itemName').value = '';
                     document.getElementById('itemPrice').value = '';
                     document.getElementById('itemContact').value = '';
@@ -474,22 +534,11 @@
                     image: "",
                     timestamp: Date.now()
                 });
-                // Clear inputs after posting
                 document.getElementById('itemName').value = '';
                 document.getElementById('itemPrice').value = '';
                 document.getElementById('itemContact').value = '';
                 document.getElementById('itemDesc').value = '';
                 fileInput.value = '';
-            }
-        }
-
-        function toggleView(target) {
-            if (target === 'workspace') {
-                document.getElementById('splash-view').style.display = 'none';
-                document.getElementById('workspace-view').style.display = 'block';
-            } else {
-                document.getElementById('workspace-view').style.display = 'none';
-                document.getElementById('splash-view').style.display = 'flex';
             }
         }
     </script>
