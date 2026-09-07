@@ -10,31 +10,41 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
     <style>
+        /* Executive Theme Architecture */
         :root {
-            --cyan: #00AEEF;
-            --dark-gray: #1a1a1a;
-            --light-bg: #ffffff;
-            --border-color: #cbd5e1;
-            --green: #16a34a;
-            --pro-gold: #d97706;
+            --brand-primary: #0f172a;      /* Oxford Blue */
+            --brand-action: #2563eb;       /* Professional Blue */
+            --brand-action-hover: #1d4ed8;
+            --surface: #ffffff;
+            --background: #f4f7f9;         /* Crisp Institutional Gray */
+            --border-light: #e2e8f0;
+            --border-focus: #94a3b8;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --status-live: #059669;        /* Emerald */
+            --premium-text: #92400e;
+            --premium-bg: #fffbeb;
+            --premium-border: #fcd34d;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--light-bg);
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            color: var(--dark-gray);
+            background-color: var(--background);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* --- LANDING VIEW (Initial Screen) --- */
+        /* --- LANDING VIEW --- */
         #landingView {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #ffffff;
+            background-color: var(--surface);
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
@@ -42,45 +52,50 @@
         }
 
         .landing-logo {
-            max-width: 280px; /*[cite: 1] */
+            max-width: 260px;
             width: 100%;
             height: auto;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .landing-tagline {
-            font-size: 1.25rem; /*[cite: 1] */
-            font-weight: 400; /*[cite: 1] */
-            color: #555; /*[cite: 1] */
-            letter-spacing: 0.5px; /*[cite: 1] */
-            margin-bottom: 30px;
+            font-size: 1.15rem;
+            font-family: Georgia, serif;
+            font-style: italic;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 40px;
         }
 
         .btn-enter {
-            background: var(--cyan);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 14px;
+            background: var(--surface);
+            color: var(--brand-primary);
+            border: 1px solid var(--border-focus);
+            padding: 12px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: background 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .btn-enter:hover {
-            background: #0095cc;
+            background: var(--brand-primary);
+            color: var(--surface);
+            border-color: var(--brand-primary);
         }
 
         .landing-footer {
             position: absolute;
-            bottom: 30px;
-            font-size: 0.75rem; /*[cite: 1] */
-            color: #aaa; /*[cite: 1] */
-            text-transform: uppercase; /*[cite: 1] */
-            letter-spacing: 1px; /*[cite: 1] */
-            line-height: 1.6;
+            bottom: 40px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            line-height: 1.8;
         }
 
         /* --- APP LEDGER VIEW --- */
@@ -89,347 +104,417 @@
         }
 
         header {
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 15px 30px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border-light);
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
         .app-brand {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .app-logo {
-            max-width: 140px;
+            max-width: 120px;
             width: 100%;
             height: auto;
         }
 
+        .app-title-group {
+            border-left: 1px solid var(--border-light);
+            padding-left: 16px;
+        }
+
         .app-title-group h1 {
             margin: 0;
-            font-size: 17px;
-            color: var(--dark-gray);
+            font-size: 16px;
+            color: var(--brand-primary);
             font-weight: 700;
+            letter-spacing: -0.2px;
         }
 
         .app-title-group p {
             margin: 2px 0 0 0;
-            font-size: 12px;
-            color: #555;
-            letter-spacing: 0.5px;
+            font-size: 11px;
+            font-family: Georgia, serif;
+            font-style: italic;
+            color: var(--text-muted);
         }
 
         .system-status {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-size: 11px;
-            color: #475569;
+            color: var(--text-muted);
             font-weight: 600;
-            background: #f1f5f9;
-            padding: 4px 10px;
-            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .status-dot {
             height: 6px;
             width: 6px;
-            background-color: var(--green);
+            background-color: var(--status-live);
             border-radius: 50%;
             display: inline-block;
         }
 
         .main-container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 1280px;
+            margin: 40px auto;
+            padding: 0 30px;
         }
 
         .workspace-grid {
             display: grid;
-            grid-template-columns: 380px 1fr;
-            gap: 25px;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 960px) {
             .workspace-grid {
                 grid-template-columns: 1fr;
             }
         }
 
         .panel {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
-            margin-bottom: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 28px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            margin-bottom: 24px;
         }
 
         .panel h3 {
-            margin: 0 0 16px 0;
-            font-size: 15px;
-            color: var(--dark-gray);
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 10px;
+            margin: 0 0 20px 0;
+            font-size: 14px;
+            color: var(--brand-primary);
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 12px;
             font-weight: 700;
-            text-transform: lowercase;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
             font-size: 11px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #475569;
-            text-transform: lowercase;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             box-sizing: border-box;
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
+            padding: 12px 14px;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
             font-size: 13px;
-            background: #ffffff;
+            background: var(--surface);
             font-family: inherit;
-            color: #1a1a1a;
+            color: var(--text-main);
+            transition: all 0.2s ease;
         }
 
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none;
-            border-color: var(--cyan);
-            box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.1);
+            border-color: var(--brand-action);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         .btn-primary {
-            background: var(--cyan);
-            color: white;
+            background: var(--brand-action);
+            color: var(--surface);
             border: none;
-            padding: 12px;
-            border-radius: 6px;
+            padding: 14px;
+            border-radius: 4px;
             width: 100%;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 13px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s ease;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary:hover {
-            background: #0095cc;
+            background: var(--brand-action-hover);
         }
 
         .btn-pro {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
+            background: var(--surface);
+            color: var(--premium-text);
+            border: 1px solid var(--premium-border);
+            padding: 12px;
+            border-radius: 4px;
             width: 100%;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 12px;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-pro:hover {
-            opacity: 0.9;
+            background: var(--premium-bg);
         }
 
         .btn-export {
-            background: #e2e8f0;
-            color: #475569;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 11px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-export:hover {
-            background: #cbd5e1;
-        }
-
-        .btn-solution {
-            background: #0369a1;
-            color: white;
-            border: none;
-            padding: 6px 12px;
+            background: var(--background);
+            color: var(--text-main);
+            border: 1px solid var(--border-light);
+            padding: 8px 16px;
             border-radius: 4px;
             font-weight: 600;
             font-size: 11px;
             cursor: pointer;
-            margin-top: 8px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-export:hover {
+            background: var(--border-light);
+        }
+
+        .btn-solution {
+            background: var(--brand-primary);
+            color: var(--surface);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: background 0.2s;
         }
 
         .btn-solution:hover {
-            background: #0284c7;
+            background: #334155;
         }
 
         .problem-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
+            background: var(--surface);
+            border: 1px solid var(--border-light);
             border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: border-color 0.2s ease;
+        }
+
+        .problem-card:hover {
+            border-color: var(--border-focus);
         }
 
         .problem-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .problem-card h4 {
             margin: 0;
-            font-size: 15px;
-            color: var(--cyan);
+            font-size: 16px;
+            color: var(--brand-primary);
             font-weight: 700;
+            letter-spacing: -0.2px;
         }
 
         .problem-badge {
             font-size: 9px;
             font-weight: 700;
-            padding: 3px 6px;
+            padding: 4px 8px;
             border-radius: 4px;
-            background: #e0f2fe;
-            color: #0369a1;
+            background: var(--background);
+            color: var(--text-muted);
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--border-light);
+        }
+
+        .problem-badge.active {
+            background: #eff6ff;
+            color: var(--brand-action);
+            border-color: #bfdbfe;
         }
 
         .problem-meta {
             font-size: 11px;
-            color: #64748b;
-            margin-bottom: 6px;
-            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .problem-card p {
-            margin: 0 0 10px 0;
-            font-size: 12px;
-            color: #334155;
-            line-height: 1.4;
+            margin: 0 0 16px 0;
+            font-size: 14px;
+            color: var(--text-main);
+            line-height: 1.6;
         }
 
         .problem-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 8px;
+            border-top: 1px solid var(--background);
+            padding-top: 12px;
             font-size: 11px;
         }
 
         .solver-tag {
-            color: #0f172a;
+            color: var(--text-muted);
             font-weight: 600;
         }
 
-        /* Proposal Form Modal / Box inside Card */
+        /* --- PROPOSAL WORKFLOW --- */
         .proposal-form-container {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: var(--background);
+            border: 1px solid var(--border-light);
             border-radius: 6px;
-            padding: 12px;
-            margin-top: 10px;
+            padding: 20px;
+            margin-top: 16px;
             display: none;
+        }
+        
+        .proposal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 16px;
+        }
+
+        .proposal-form-container h4 {
+            margin: 0 0 16px 0;
+            font-size: 12px;
+            color: var(--brand-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 8px;
         }
 
         .proposal-item {
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 4px;
-            padding: 8px;
-            margin-top: 8px;
-            font-size: 11px;
+            background: #f8fafc;
+            border-left: 3px solid var(--brand-action);
+            padding: 16px;
+            margin-top: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
+        .proposal-item strong {
+            color: var(--brand-primary);
+        }
+
+        .proposal-meta-data {
+            margin-top: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* --- UTILITIES --- */
         .pro-box {
-            background: #fffbeb;
-            border: 1px solid #fcd34d;
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 20px;
+            background: var(--premium-bg);
+            border: 1px solid var(--premium-border);
+            border-radius: 6px;
+            padding: 24px;
+            margin-top: 24px;
         }
 
         .pro-box h4 {
-            margin: 0 0 6px 0;
-            font-size: 13px;
-            color: #b45309;
+            margin: 0 0 8px 0;
+            font-size: 12px;
+            color: var(--premium-text);
             font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .pro-box p {
-            margin: 0 0 10px 0;
-            font-size: 11px;
-            color: #78350f;
-            line-height: 1.4;
+            margin: 0 0 16px 0;
+            font-size: 12px;
+            color: var(--premium-text);
+            line-height: 1.5;
         }
 
         .usage-badge {
-            font-size: 11px;
-            background: #f1f5f9;
-            color: #475569;
-            padding: 4px 8px;
+            font-size: 10px;
+            background: var(--background);
+            color: var(--text-main);
+            padding: 6px 10px;
             border-radius: 4px;
-            font-weight: 600;
+            font-weight: 700;
             display: inline-block;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--border-light);
         }
 
         .privacy-panel {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
-            margin-top: 30px;
+            background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            padding: 32px;
+            margin-top: 40px;
             font-size: 12px;
-            color: #475569;
-            line-height: 1.6;
+            color: var(--text-muted);
+            line-height: 1.8;
         }
 
         .privacy-panel h4 {
-            margin: 0 0 8px 0;
-            color: var(--dark-gray);
-            font-size: 14px;
+            margin: 0 0 12px 0;
+            color: var(--text-main);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .footer {
             text-align: center;
-            margin: 40px 0;
-            font-size: 0.75rem; /*[cite: 1] */
-            color: #aaa; /*[cite: 1] */
-            text-transform: uppercase; /*[cite: 1] */
-            letter-spacing: 1px; /*[cite: 1] */
-            line-height: 1.6;
+            margin: 60px 0 40px 0;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            line-height: 1.8;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. INITIAL LANDING SCREEN -->
+    <!-- 1. EXECUTIVE LANDING SCREEN -->
     <div id="landingView">
-        <div class="container">
+        <div class="container" style="max-width: 600px;">
             <img src="logo.png" alt="Bizave Logo" class="landing-logo">
             <div class="landing-tagline">Life's tool at your hands.</div>
-            <button class="btn-enter" onclick="enterApp()">enter workspace</button>
+            <button class="btn-enter" onclick="enterApp()">Authenticate & Enter</button>
         </div>
 
         <div class="landing-footer">
-            &copy; 2026 Bizave. All Rights Reserved. <br>
+            &copy; 2026 Bizave. All Rights Reserved.<br>
             BIZAVE&reg; is a Registered Trademark.
         </div>
     </div>
@@ -440,13 +525,13 @@
             <div class="app-brand">
                 <img src="logo.png" alt="Bizave Logo" class="app-logo">
                 <div class="app-title-group">
-                    <h1>bizave</h1>
+                    <h1>Bizave</h1>
                     <p>Life's tool at your hands.</p>
                 </div>
             </div>
             <div class="system-status">
                 <span class="status-dot"></span>
-                <span id="licenseStatusText">standard license (5 posts/day limit)</span>
+                <span id="licenseStatusText">Standard License (5 Posts/Day)</span>
             </div>
         </header>
 
@@ -456,65 +541,65 @@
                 <!-- LEFT COLUMN: SUBMISSION & ACTIVATION -->
                 <div>
                     <div class="panel">
-                        <h3>submit problem & solution</h3>
-                        <div id="usageCounter" class="usage-badge">0 / 5 free submissions used today</div>
+                        <h3>Submit Protocol</h3>
+                        <div id="usageCounter" class="usage-badge">0 / 5 Authorized Submissions</div>
                         
                         <div class="form-group">
-                            <label>problem / challenge title</label>
-                            <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
+                            <label>Challenge Identifier</label>
+                            <input type="text" id="problemTitle" placeholder="e.g., Network diagnostic failure">
                         </div>
                         <div class="form-group">
-                            <label>category</label>
+                            <label>Classification</label>
                             <select id="problemCategory">
-                                <option>technical & IT troubleshooting</option>
-                                <option>software & application support</option>
-                                <option>hardware & equipment repair</option>
-                                <option>daily life & practical solutions</option>
-                                <option>general inquiries & advice</option>
+                                <option>Technical & IT Troubleshooting</option>
+                                <option>Software & Application Support</option>
+                                <option>Hardware & Equipment Repair</option>
+                                <option>Operational & Practical Solutions</option>
+                                <option>General Advisory</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>status</label>
+                            <label>Current Status</label>
                             <select id="problemStatus">
-                                <option>seeking solution</option>
-                                <option>solution found / resolved</option>
+                                <option>Seeking Solution</option>
+                                <option>Resolved / Archived</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>contact or contributor name</label>
-                            <input type="text" id="problemContact" placeholder="e.g., alex / +63 917 xxx xxxx">
+                            <label>Originator Credentials</label>
+                            <input type="text" id="problemContact" placeholder="Name / +63 917 xxx xxxx">
                         </div>
                         <div class="form-group">
-                            <label>describe the problem & proposed solution</label>
-                            <textarea id="problemDesc" rows="4" placeholder="share details about the problem and how it can be solved..."></textarea>
+                            <label>Technical Description & Parameters</label>
+                            <textarea id="problemDesc" rows="5" placeholder="Detail the parameters of the challenge..."></textarea>
                         </div>
-                        <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
+                        <button class="btn-primary" onclick="submitProblem()">Commit to Ledger</button>
                     </div>
 
                     <!-- MONETIZATION / ACTIVATION MODULE -->
                     <div class="pro-box">
-                        <h4>unlock limitless problem solving</h4>
-                        <p>Free tier is capped at 5 problem submissions per day. To solve more problems without limits, contact <strong>0917 551 9510</strong> to get your activation code.</p>
-                        <div class="form-group" style="margin-bottom: 10px;">
-                            <input type="text" id="activationKeyInput" placeholder="enter activation code...">
+                        <h4>Enterprise Activation</h4>
+                        <p>Standard access is restricted to 5 network submissions daily. To lift protocol restrictions, contact the administration desk at <strong>0917 551 9510</strong> for a clearance code.</p>
+                        <div class="form-group" style="margin-bottom: 12px;">
+                            <input type="text" id="activationKeyInput" placeholder="Enter clearance code...">
                         </div>
-                        <button class="btn-pro" onclick="activateLicense()">activate limitless access</button>
+                        <button class="btn-pro" onclick="activateLicense()">Authenticate Unlimited Access</button>
                     </div>
                 </div>
 
                 <!-- RIGHT COLUMN: FEED & DATA EXPORT -->
                 <div class="panel">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
-                        <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
-                        <button class="btn-export" onclick="exportCSV()">export records (.csv)</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-light); padding-bottom: 16px;">
+                        <h3 style="margin: 0; border: none; padding: 0;">Global Active Ledger</h3>
+                        <button class="btn-export" onclick="exportCSV()">Export Dataset (.csv)</button>
                     </div>
 
-                    <div style="margin-bottom: 16px;">
-                        <input type="text" id="searchQuery" placeholder="search problems, solutions, or categories..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
+                    <div style="margin-bottom: 24px;">
+                        <input type="text" id="searchQuery" placeholder="Filter records by identifier, classification, or personnel..." onkeyup="filterFeed()" style="width: 100%; padding: 12px 16px; border: 1px solid var(--border-light); border-radius: 4px; font-size: 13px; background: var(--background);">
                     </div>
 
                     <div id="feedContainer">
-                        <p style="color: #94a3b8; font-size: 12px;">connecting to live database...</p>
+                        <p style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 40px;">Establishing secure database connection...</p>
                     </div>
                 </div>
 
@@ -522,17 +607,16 @@
 
             <!-- BUILT-IN DATA PRIVACY POLICY SECTION -->
             <div class="privacy-panel">
-                <h4>bizave data privacy policy</h4>
-                <p>At <strong>bizave</strong> ("Life's tool at your hands"[cite: 1]), we respect and protect your privacy. This policy outlines how we handle data within our software application:</p>
-                <ul style="margin: 6px 0; padding-left: 18px;">
-                    <li><strong>Information Collection:</strong> We collect problem descriptions, category selections, and optional contact details voluntarily submitted by users into our real-time database ledger.</li>
-                    <li><strong>Use of Data:</strong> Submitted information is processed solely for peer-to-peer problem-solving, database querying, and software utility functionality.</li>
-                    <li><strong>Data Security:</strong> All records are stored securely using cloud database encryption protocols. We do not sell or share user data with third-party commercial advertisers.</li>
-                    <li><strong>Contact:</strong> For privacy inquiries or activation support regarding your software license, contact us at 0917 551 9510.</li>
+                <h4>Data Governance & Privacy Protocol</h4>
+                <p>At <strong>Bizave</strong> ("Life's tool at your hands"), administrative integrity and data security are paramount. This protocol defines the handling of system data:</p>
+                <ul style="margin: 12px 0; padding-left: 24px;">
+                    <li><strong>Data Acquisition:</strong> The system logs technical descriptors, classification metrics, and originator credentials as voluntarily submitted to the central ledger.</li>
+                    <li><strong>Operational Utility:</strong> Indexed data is processed strictly to facilitate peer-to-peer technical resolution, database indexing, and authorized Class 9 software utility functions.</li>
+                    <li><strong>Security Architecture:</strong> Ledger records are maintained under encrypted cloud database protocols. Administrative policy strictly prohibits the unauthorized external commercialization of originator data.</li>
+                    <li><strong>Administrative Contact:</strong> For compliance inquiries or enterprise license authentication, direct correspondence to 0917 551 9510.</li>
                 </ul>
             </div>
 
-            <!-- Minimalist Copyright Footer matching source[cite: 1] -->
             <div class="footer">
                 &copy; 2026 Bizave. All Rights Reserved. <br>
                 BIZAVE&reg; is a Registered Trademark.
@@ -565,9 +649,9 @@
 
         window.onload = function() {
             if (isLimitlessActive) {
-                document.getElementById('licenseStatusText').innerText = 'limitless tier active';
-                document.getElementById('licenseStatusText').style.color = '#d97706';
-                document.getElementById('usageCounter').innerText = 'limitless problem solving unlocked';
+                document.getElementById('licenseStatusText').innerText = 'Enterprise Tier Active';
+                document.getElementById('licenseStatusText').style.color = 'var(--premium-text)';
+                document.getElementById('usageCounter').innerText = 'Unrestricted Access Authorized';
             } else {
                 updateUsageDisplay();
             }
@@ -582,13 +666,13 @@
                 container.innerHTML = `
                     <div class="problem-card">
                         <div class="problem-header">
-                            <h4>welcome to bizave problem solving</h4>
-                            <span class="problem-badge">seeking solution</span>
+                            <h4>System Initialization Vector</h4>
+                            <span class="problem-badge active">Seeking Solution</span>
                         </div>
-                        <div class="problem-meta">technical & IT troubleshooting &bull; posted by admin</div>
-                        <p>share your challenges here and connect with community-driven solutions. life's tool at your hands.</p>
+                        <div class="problem-meta">Technical & IT Troubleshooting &bull; System Admin</div>
+                        <p>Ledger is currently clear. Awaiting originator submissions for problem-resolution indexing. Proceed to left panel to commit initial protocol.</p>
                         <div class="problem-footer">
-                            <span class="solver-tag">contact: support@bizave.io</span>
+                            <span class="solver-tag">Node: support@bizave.io</span>
                         </div>
                     </div>
                 `;
@@ -620,14 +704,14 @@
         function updateUsageDisplay() {
             if (isLimitlessActive) return;
             const record = getDailyUsage();
-            document.getElementById('usageCounter').innerText = `${record.count} / 5 free submissions used today`;
+            document.getElementById('usageCounter').innerText = `${record.count} / 5 Authorized Submissions`;
         }
 
         function checkDailyLimit() {
             if (isLimitlessActive) return true;
             const record = getDailyUsage();
             if (record.count >= 5) {
-                alert("You have reached your free daily limit of 5 problem submissions. To solve more problems, please contact 0917 551 9510 to get your activation code.");
+                alert("Protocol Notice: Daily authorized submission limit reached. Please contact administration at 0917 551 9510 to process a clearance code.");
                 return false;
             }
             return true;
@@ -649,15 +733,24 @@
                 const card = document.createElement('div');
                 card.className = 'problem-card';
                 
+                let badgeClass = item.status.toLowerCase().includes('seeking') ? 'problem-badge active' : 'problem-badge';
+
                 let proposalsHtml = '';
                 if (item.proposals) {
                     Object.values(item.proposals).forEach(p => {
                         proposalsHtml += `
                             <div class="proposal-item">
-                                <strong>Proposal (${p.exchangeType}):</strong> ${p.solutionText}<br>
-                                <em>Steps:</em> ${p.steps || 'N/A'}<br>
-                                <em>Tools:</em> ${p.tools || 'None'} | <em>Skills:</em> ${p.skills || 'None'} | <em>Term:</em> ${p.offerTerm}<br>
-                                <span style="color:#0369a1;">Proposed by: ${p.solverContact}</span>
+                                <div style="margin-bottom: 8px;"><strong>Resolution Proposal (${p.exchangeType})</strong></div>
+                                <div>${p.solutionText}</div>
+                                <div class="proposal-meta-data">
+                                    <span><strong>Process:</strong> ${p.steps || 'N/A'}</span>
+                                    <span><strong>Hardware:</strong> ${p.tools || 'None'}</span>
+                                    <span><strong>Competencies:</strong> ${p.skills || 'None'}</span>
+                                    <span><strong>Terms:</strong> ${p.offerTerm}</span>
+                                </div>
+                                <div style="margin-top: 12px; color: var(--brand-action); font-weight: 600; font-size: 11px; text-transform: uppercase;">
+                                    Executing Node: ${p.solverContact}
+                                </div>
                             </div>
                         `;
                     });
@@ -666,57 +759,70 @@
                 card.innerHTML = `
                     <div class="problem-header">
                         <h4>${item.title}</h4>
-                        <span class="problem-badge">${item.status}</span>
+                        <span class="${badgeClass}">${item.status}</span>
                     </div>
                     <div class="problem-meta">${item.category}</div>
                     <p>${item.desc}</p>
                     <div class="problem-footer">
-                        <span class="solver-tag">contributor: ${item.contact || 'anonymous'}</span>
+                        <span class="solver-tag">Originator: ${item.contact || 'Classified'}</span>
+                        ${item.status.toLowerCase().includes('seeking') ? `<button class="btn-solution" onclick="toggleProposalForm('${key}')">Draft Resolution</button>` : ''}
                     </div>
-                    ${item.status === 'seeking solution' ? `<button class="btn-solution" onclick="toggleProposalForm('${key}')">propose a solution</button>` : ''}
                     
                     <div id="proposalForm_${key}" class="proposal-form-container">
-                        <h4 style="margin:0 0 8px 0; font-size:12px; color:#0369a1;">propose solution details</h4>
-                        <div class="form-group">
-                            <label>proposal type / exchange model</label>
-                            <select id="p_type_${key}">
-                                <option>for a fee</option>
-                                <option>in exchange for a thing (barter)</option>
-                                <option>in exchange for money</option>
-                                <option>in exchange for something to do (favor)</option>
-                            </select>
+                        <h4>Formulate Resolution Proposal</h4>
+                        
+                        <div class="proposal-grid">
+                            <div class="form-group">
+                                <label>Exchange Mechanism</label>
+                                <select id="p_type_${key}">
+                                    <option>Professional Fee / Remuneration</option>
+                                    <option>Asset Exchange (Barter)</option>
+                                    <option>Service Reciprocation (Favor)</option>
+                                    <option>Pro Bono</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Offer Terms</label>
+                                <select id="p_term_${key}">
+                                    <option>Standard 'As Is' Provision</option>
+                                    <option>Time-Restricted Validation</option>
+                                </select>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label>your solution summary</label>
-                            <input type="text" id="p_solution_${key}" placeholder="briefly describe your solution...">
+                            <label>Executive Summary of Solution</label>
+                            <input type="text" id="p_solution_${key}" placeholder="High-level overview of the proposed fix...">
                         </div>
+                        
                         <div class="form-group">
-                            <label>detailed step-by-step process</label>
-                            <textarea id="p_steps_${key}" rows="2" placeholder="step 1, step 2..."></textarea>
+                            <label>Procedural Steps (Methodology)</label>
+                            <textarea id="p_steps_${key}" rows="3" placeholder="Phase 1: Diagnosis, Phase 2: Execution..."></textarea>
                         </div>
+                        
+                        <div class="proposal-grid">
+                            <div class="form-group">
+                                <label>Required Hardware / Tools</label>
+                                <input type="text" id="p_tools_${key}" placeholder="e.g., Diagnostic software, proprietary tools">
+                            </div>
+                            <div class="form-group">
+                                <label>Executing Personnel Skills</label>
+                                <input type="text" id="p_skills_${key}" placeholder="e.g., Systems Architect, Network Engineer">
+                            </div>
+                        </div>
+
                         <div class="form-group">
-                            <label>equipment / tools available</label>
-                            <input type="text" id="p_tools_${key}" placeholder="e.g., diagnostic kit, laptop...">
+                            <label>Executing Node Credentials (Contact)</label>
+                            <input type="text" id="p_contact_${key}" placeholder="Name / Contact Identifier">
                         </div>
-                        <div class="form-group">
-                            <label>your skills / qualifications</label>
-                            <input type="text" id="p_skills_${key}" placeholder="e.g., certified technician...">
+                        
+                        <div style="display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid var(--border-light); padding-top: 16px; margin-top: 8px;">
+                            <button class="btn-export" onclick="toggleProposalForm('${key}')">Cancel</button>
+                            <button class="btn-primary" style="width: auto; padding: 10px 24px;" onclick="submitProposal('${key}')">Submit Proposal</button>
                         </div>
-                        <div class="form-group">
-                            <label>offer term</label>
-                            <select id="p_term_${key}">
-                                <option>limited time offer</option>
-                                <option>as is</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>your contact number / name</label>
-                            <input type="text" id="p_contact_${key}" placeholder="name / +63 917 xxx xxxx">
-                        </div>
-                        <button class="btn-primary" style="padding:8px; font-size:12px;" onclick="submitProposal('${key}')">submit solution proposal</button>
                     </div>
 
-                    <div style="margin-top:8px;">
+                    <div style="margin-top: 16px;">
                         ${proposalsHtml}
                     </div>
                 `;
@@ -724,7 +830,7 @@
             });
 
             if (count === 0) {
-                container.innerHTML = `<p style="color: #94a3b8; font-size: 12px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
+                container.innerHTML = `<p style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 40px;">Zero matches found in current ledger query.</p>`;
             }
         }
 
@@ -747,7 +853,7 @@
             const solverContact = document.getElementById(`p_contact_${key}`).value;
 
             if (!solutionText || !solverContact) {
-                alert("please provide your solution summary and contact info.");
+                alert("Validation Error: Solution summary and credentials are required fields.");
                 return;
             }
 
@@ -762,7 +868,7 @@
                 timestamp: Date.now()
             });
 
-            alert("Solution proposal successfully published to the ledger!");
+            alert("Proposal successfully committed to the global ledger.");
             document.getElementById(`proposalForm_${key}`).style.display = 'none';
         }
 
@@ -782,7 +888,7 @@
             const desc = document.getElementById('problemDesc').value;
 
             if (!title || !desc) {
-                alert("please provide a problem title and description.");
+                alert("Validation Error: Please populate identifier and technical description fields.");
                 return;
             }
 
@@ -807,32 +913,33 @@
             if (code.length > 3) {
                 isLimitlessActive = true;
                 localStorage.setItem('bizave_unlimited', 'true');
-                document.getElementById('licenseStatusText').innerText = 'limitless tier active';
-                document.getElementById('licenseStatusText').style.color = '#d97706';
-                document.getElementById('usageCounter').innerText = 'limitless problem solving unlocked';
-                alert("Success! Limitless access has been activated on your software instance.");
+                document.getElementById('licenseStatusText').innerText = 'Enterprise Tier Active';
+                document.getElementById('licenseStatusText').style.color = 'var(--premium-text)';
+                document.getElementById('usageCounter').innerText = 'Unrestricted Access Authorized';
+                alert("Authentication Confirmed. Enterprise restrictions have been lifted.");
             } else {
-                alert("Invalid activation code. Please contact 0917 551 9510 to get a valid code.");
+                alert("Authentication Failed. Invalid clearance code.");
             }
         }
 
         function exportCSV() {
             if (!globalCache || Object.keys(globalCache).length === 0) {
-                alert("no records to export.");
+                alert("Export Notice: Ledger is currently empty.");
                 return;
             }
 
-            let csv = 'id,title,category,status,contributor,description\n';
+            let csv = 'Identifier,Challenge_Title,Classification,Status,Originator,Technical_Parameters\n';
             Object.keys(globalCache).forEach(key => {
                 const item = globalCache[key];
-                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}"\n`;
+                const cleanDesc = (item.desc || '').replace(/"/g, '""');
+                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${cleanDesc}"\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'bizave_problem_solving_ledger.csv';
+            a.download = 'Bizave_Enterprise_Ledger_Export.csv';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
