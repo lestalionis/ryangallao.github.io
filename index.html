@@ -1,1 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bizave | life's tool at your hands</title>
+    
+    <!-- Firebase Cloud Database SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
+    <style>
+        :root {
+            --cyan: #00AEEF;
+            --dark-gray: #1e293b;
+            --light-bg: #f8fafc;
+            --border-color: #cbd5e1;
+            --green: #16a34a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-gray);
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 3px solid var(--cyan);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        }
+
+        .brand-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-section h1 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--cyan);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-section p {
+            margin: 2px 0 0 0;
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--green);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .workspace-grid {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .workspace-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .panel h3 {
+            margin: 0 0 16px 0;
+            font-size: 16px;
+            color: var(--dark-gray);
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            background: #ffffff;
+            font-family: inherit;
+            color: #1e293b;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            width: 100%;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #0095cc;
+        }
+
+        .btn-export {
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-export:hover {
+            background: #cbd5e1;
+        }
+
+        .problem-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: transform 0.1s;
+        }
+
+        .problem-card:hover {
+            border-color: var(--cyan);
+        }
+
+        .problem-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+        }
+
+        .problem-card h4 {
+            margin: 0;
+            font-size: 16px;
+            color: var(--cyan);
+            font-weight: 700;
+        }
+
+        .problem-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #e0f2fe;
+            color: #0369a1;
+            text-transform: uppercase;
+        }
+
+        .problem-meta {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .problem-card p {
+            margin: 0 0 12px 0;
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .problem-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
+            font-size: 12px;
+        }
+
+        .solver-tag {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="brand-section">
+            <h1>bizave</h1>
+            <p>life's tool at your hands</p>
+        </div>
+        <div class="system-status">
+            <span class="status-dot"></span>
+            <span>live database online</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="workspace-grid">
+            
+            <!-- LEFT PANEL: SUBMIT A PROBLEM OR SOLUTION -->
+            <div class="panel">
+                <h3>submit problem & solution</h3>
+                <div class="form-group">
+                    <label>problem / challenge title</label>
+                    <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
+                </div>
+                <div class="form-group">
+                    <label>category</label>
+                    <select id="problemCategory">
+                        <option>technical & IT troubleshooting</option>
+                        <option>software & application support</option>
+                        <option>hardware & equipment repair</option>
+                        <option>daily life & practical solutions</option>
+                        <option>general inquiries & advice</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>status</label>
+                    <select id="problemStatus">
+                        <option>seeking solution</option>
+                        <option>solution found / resolved</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>contact or contributor name</label>
+                    <input type="text" id="problemContact" placeholder="e.g., alex / +63 917 xxx xxxx">
+                </div>
+                <div class="form-group">
+                    <label>describe the problem & proposed solution</label>
+                    <textarea id="problemDesc" rows="4" placeholder="share details about the problem and how it can be solved..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
+            </div>
+
+            <!-- RIGHT PANEL: COMMUNITY PROBLEMS & SOLUTIONS FEED -->
+            <div class="panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
+                    <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
+                    <button class="btn-export" onclick="exportCSV()">export records (.csv)</button>
+                </div>
+
+                <!-- Search / Query Bar -->
+                <div style="margin-bottom: 16px;">
+                    <input type="text" id="searchQuery" placeholder="search problems, solutions, or categories..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
+                </div>
+
+                <div id="feedContainer">
+                    <p style="color: #94a3b8; font-size: 13px;">connecting to live database...</p>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (software & digital data utilities).
+        </footer>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCuHLmUpAUcfjHMz6KciWD5bUfvPnKnKHM",
+            authDomain: "bizave-1cb28.firebaseapp.com",
+            databaseURL: "https://bizave-1cb28-default-rtdb.firebaseio.com",
+            projectId: "bizave-1cb28",
+            storageBucket: "bizave-1cb28.firebasestorage.app",
+            messagingSenderId: "595993179596",
+            appId: "1:595993179596:web:bc9989f13542cbd8831969"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        const problemsRef = db.ref('bizave_problems');
+
+        let globalCache = {};
+
+        problemsRef.on('value', (snapshot) => {
+            const data = snapshot.val();
+            const container = document.getElementById('feedContainer');
+            
+            if (!data) {
+                globalCache = {};
+                container.innerHTML = `
+                    <div class="problem-card">
+                        <div class="problem-header">
+                            <h4>welcome to bizave problem solving</h4>
+                            <span class="problem-badge">seeking solution</span>
+                        </div>
+                        <div class="problem-meta">technical & IT troubleshooting &bull; posted by admin</div>
+                        <p>share your challenges here and connect with community-driven solutions. life's tool at your hands.</p>
+                        <div class="problem-footer">
+                            <span class="solver-tag">contact: support@bizave.io</span>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            globalCache = data;
+            renderFeed(Object.keys(data).reverse(), data);
+        });
+
+        function renderFeed(keys, data) {
+            const container = document.getElementById('feedContainer');
+            container.innerHTML = '';
+            const query = document.getElementById('searchQuery').value.toLowerCase();
+
+            let count = 0;
+            keys.forEach(key => {
+                const item = data[key];
+                const searchable = `${item.title} ${item.category} ${item.status} ${item.desc} ${item.contact}`.toLowerCase();
+
+                if (query && !searchable.includes(query)) return;
+
+                count++;
+                const card = document.createElement('div');
+                card.className = 'problem-card';
+                card.innerHTML = `
+                    <div class="problem-header">
+                        <h4>${item.title}</h4>
+                        <span class="problem-badge">${item.status}</span>
+                    </div>
+                    <div class="problem-meta">${item.category}</div>
+                    <p>${item.desc}</p>
+                    <div class="problem-footer">
+                        <span class="solver-tag">contributor: ${item.contact || 'anonymous'}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (count === 0) {
+                container.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
+            }
+        }
+
+        function filterFeed() {
+            if (globalCache) {
+                renderFeed(Object.keys(globalCache).reverse(), globalCache);
+            }
+        }
+
+        function submitProblem() {
+            const title = document.getElementById('problemTitle').value;
+            const category = document.getElementById('problemCategory').value;
+            const status = document.getElementById('problemStatus').value;
+            const contact = document.getElementById('problemContact').value;
+            const desc = document.getElementById('problemDesc5').value || document.getElementById('problemDesc').value;
+
+            if (!title || !desc) {
+                alert("please provide a problem title and description.");
+                return;
+            }
+
+            problemsRef.push({
+                title,
+                category,
+                status,
+                contact,
+                desc,
+                timestamp: Date.now()
+            });
+
+            document.getElementById('problemTitle').value = '';
+            document.getElementById('problemContact').value = '';
+            document.getElementById('problemDesc').value = '';
+        }
+
+        function exportCSV() {
+            if (!globalCache || Object.keys(globalCache).length === 0) {
+                alert("no records to export.");
+                return;
+            }
+
+            let csv = 'id,title,category,status,contributor,description\n';
+            Object.keys(globalCache).forEach(key => {
+                const item = globalCache[key];
+                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bizave_problem_solving_ledger.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
