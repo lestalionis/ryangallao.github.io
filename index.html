@@ -27,27 +27,101 @@
             color: var(--dark-gray);
         }
 
-        /* Minimalist Brand Header Style */
-        header {
+        /* --- LANDING VIEW (Initial Screen) --- */
+        #landingView {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
             text-align: center;
-            padding: 40px 20px 20px 20px;
-            background: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
         }
 
-        .logo {
-            max-width: 220px;
+        .landing-logo {
+            max-width: 280px;[cite: 1]
             width: 100%;
             height: auto;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
 
-        .tagline {
-            font-size: 1.25rem;
-            font-weight: 400;
+        .landing-tagline {
+            font-size: 1.25rem;[cite: 1]
+            font-weight: 400;[cite: 1]
+            color: #555;[cite: 1]
+            letter-spacing: 0.5px;[cite: 1]
+            margin-bottom: 30px;
+        }
+
+        .btn-enter {
+            background: var(--cyan);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn-enter:hover {
+            background: #0095cc;
+        }
+
+        .landing-footer {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.75rem;[cite: 1]
+            color: #aaa;[cite: 1]
+            text-transform: uppercase;[cite: 1]
+            letter-spacing: 1px;[cite: 1]
+            line-height: 1.6;
+        }
+
+        /* --- APP LEDGER VIEW (Hidden by default) --- */
+        #appView {
+            display: none;
+        }
+
+        /* App Header Layout: Logo on Upper-Left */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .app-logo {
+            max-width: 140px;
+            width: 100%;
+            height: auto;
+        }
+
+        .app-title-group h1 {
+            margin: 0;
+            font-size: 17px;
+            color: var(--dark-gray);
+            font-weight: 700;
+        }
+
+        .app-title-group p {
+            margin: 2px 0 0 0;
+            font-size: 12px;
             color: #555;
             letter-spacing: 0.5px;
-            margin: 0;
         }
 
         .system-status {
@@ -57,7 +131,6 @@
             font-size: 11px;
             color: #475569;
             font-weight: 600;
-            margin-top: 10px;
             background: #f1f5f9;
             padding: 4px 10px;
             border-radius: 20px;
@@ -300,7 +373,6 @@
             font-size: 14px;
         }
 
-        /* Minimalist Footer Style matching source[cite: 1] */
         .footer {
             text-align: center;
             margin: 40px 0;
@@ -314,108 +386,132 @@
 </head>
 <body>
 
-    <!-- Minimalist Brand Header Layout[cite: 1] -->
-    <header>
+    <!-- 1. INITIAL LANDING SCREEN -->
+    <div id="landingView">
         <div class="container">
-            <img src="logo.png" alt="Bizave Logo" class="logo">
-            <div class="tagline">Life's tool at your hands.</div>
-            <div class="system-status">
-                <span class="status-dot"></span>
-                <span id="licenseStatusText">standard license (5 posts/day limit)</span>
-            </div>
-        </div>
-    </header>
-
-    <div class="main-container">
-        <div class="workspace-grid">
-            
-            <!-- LEFT COLUMN: SUBMISSION & ACTIVATION -->
-            <div>
-                <div class="panel">
-                    <h3>submit problem & solution</h3>
-                    <div id="usageCounter" class="usage-badge">0 / 5 free submissions used today</div>
-                    
-                    <div class="form-group">
-                        <label>problem / challenge title</label>
-                        <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
-                    </div>
-                    <div class="form-group">
-                        <label>category</label>
-                        <select id="problemCategory">
-                            <option>technical & IT troubleshooting</option>
-                            <option>software & application support</option>
-                            <option>hardware & equipment repair</option>
-                            <option>daily life & practical solutions</option>
-                            <option>general inquiries & advice</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>status</label>
-                        <select id="problemStatus">
-                            <option>seeking solution</option>
-                            <option>solution found / resolved</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>contact or contributor name</label>
-                        <input type="text" id="problemContact" placeholder="e.g., alex / +63 917 xxx xxxx">
-                    </div>
-                    <div class="form-group">
-                        <label>describe the problem & proposed solution</label>
-                        <textarea id="problemDesc" rows="4" placeholder="share details about the problem and how it can be solved..."></textarea>
-                    </div>
-                    <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
-                </div>
-
-                <!-- MONETIZATION / ACTIVATION MODULE -->
-                <div class="pro-box">
-                    <h4>unlock limitless problem solving</h4>
-                    <p>Free tier is capped at 5 problem submissions per day. To solve more problems without limits, contact <strong>0917 551 9510</strong> to get your activation code.</p>
-                    <div class="form-group" style="margin-bottom: 10px;">
-                        <input type="text" id="activationKeyInput" placeholder="enter activation code...">
-                    </div>
-                    <button class="btn-pro" onclick="activateLicense()">activate limitless access</button>
-                </div>
-            </div>
-
-            <!-- RIGHT COLUMN: FEED & DATA EXPORT -->
-            <div class="panel">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
-                    <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
-                    <button class="btn-export" onclick="exportCSV()">export records (.csv)</button>
-                </div>
-
-                <div style="margin-bottom: 16px;">
-                    <input type="text" id="searchQuery" placeholder="search problems, solutions, or categories..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
-                </div>
-
-                <div id="feedContainer">
-                    <p style="color: #94a3b8; font-size: 12px;">connecting to live database...</p>
-                </div>
-            </div>
-
+            <img src="logo.png" alt="Bizave Logo" class="landing-logo">
+            <div class="landing-tagline">Life's tool at your hands.</div>
+            <button class="btn-enter" onclick="enterApp()">enter workspace</button>
         </div>
 
-        <!-- BUILT-IN DATA PRIVACY POLICY SECTION -->
-        <div class="privacy-panel">
-            <h4>bizave data privacy policy</h4>
-            <p>At <strong>bizave</strong> ("life's tool at your hands"[cite: 1]), we respect and protect your privacy. This policy outlines how we handle data within our software application:</p>
-            <ul style="margin: 6px 0; padding-left: 18px;">
-                <li><strong>Information Collection:</strong> We collect problem descriptions, category selections, and optional contact details voluntarily submitted by users into our real-time database ledger.</li>
-                <li><strong>Use of Data:</strong> Submitted information is processed solely for peer-to-peer problem-solving, database querying, and software utility functionality.</li>
-                <li><strong>Data Security:</strong> All records are stored securely using cloud database encryption protocols. We do not sell or share user data with third-party commercial advertisers.</li>
-                <li><strong>Contact:</strong> For privacy inquiries or activation support regarding your software license, contact us at 0917 551 9510.</li>
-            </ul>
-        </div>
-
-        <!-- Minimalist Copyright Footer matching source[cite: 1] -->
-        <div class="footer">
+        <div class="landing-footer">
             &copy; 2026 Bizave. All Rights Reserved. <br>
             BIZAVE&reg; is a Registered Trademark.
         </div>
     </div>
 
+    <!-- 2. MAIN APP & LEDGER SCREEN -->
+    <div id="appView">
+        <header>
+            <div class="app-brand">
+                <img src="logo.png" alt="Bizave Logo" class="app-logo">
+                <div class="app-title-group">
+                    <h1>bizave</h1>
+                    <p>Life's tool at your hands.</p>
+                </div>
+            </div>
+            <div class="system-status">
+                <span class="status-dot"></span>
+                <span id="licenseStatusText">standard license (5 posts/day limit)</span>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <div class="workspace-grid">
+                
+                <!-- LEFT COLUMN: SUBMISSION & ACTIVATION -->
+                <div>
+                    <div class="panel">
+                        <h3>submit problem & solution</h3>
+                        <div id="usageCounter" class="usage-badge">0 / 5 free submissions used today</div>
+                        
+                        <div class="form-group">
+                            <label>problem / challenge title</label>
+                            <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
+                        </div>
+                        <div class="form-group">
+                            <label>category</label>
+                            <select id="problemCategory">
+                                <option>technical & IT troubleshooting</option>
+                                <option>software & application support</option>
+                                <option>hardware & equipment repair</option>
+                                <option>daily life & practical solutions</option>
+                                <option>general inquiries & advice</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>status</label>
+                            <select id="problemStatus">
+                                <option>seeking solution</option>
+                                <option>solution found / resolved</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>contact or contributor name</label>
+                            <input type="text" id="problemContact" placeholder="e.g., alex / +63 917 xxx xxxx">
+                        </div>
+                        <div class="form-group">
+                            <label>describe the problem & proposed solution</label>
+                            <textarea id="problemDesc" rows="4" placeholder="share details about the problem and how it can be solved..."></textarea>
+                        </div>
+                        <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
+                    </div>
+
+                    <!-- MONETIZATION / ACTIVATION MODULE -->
+                    <div class="pro-box">
+                        <h4>unlock limitless problem solving</h4>
+                        <p>Free tier is capped at 5 problem submissions per day. To solve more problems without limits, contact <strong>0917 551 9510</strong> to get your activation code.</p>
+                        <div class="form-group" style="margin-bottom: 10px;">
+                            <input type="text" id="activationKeyInput" placeholder="enter activation code...">
+                        </div>
+                        <button class="btn-pro" onclick="activateLicense()">activate limitless access</button>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: FEED & DATA EXPORT -->
+                <div class="panel">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
+                        <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
+                        <button class="btn-export" onclick="exportCSV()">export records (.csv)</button>
+                    </div>
+
+                    <div style="margin-bottom: 16px;">
+                        <input type="text" id="searchQuery" placeholder="search problems, solutions, or categories..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
+                    </div>
+
+                    <div id="feedContainer">
+                        <p style="color: #94a3b8; font-size: 12px;">connecting to live database...</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- BUILT-IN DATA PRIVACY POLICY SECTION -->
+            <div class="privacy-panel">
+                <h4>bizave data privacy policy</h4>
+                <p>At <strong>bizave</strong> ("Life's tool at your hands"[cite: 1]), we respect and protect your privacy. This policy outlines how we handle data within our software application:</p>
+                <ul style="margin: 6px 0; padding-left: 18px;">
+                    <li><strong>Information Collection:</strong> We collect problem descriptions, category selections, and optional contact details voluntarily submitted by users into our real-time database ledger.</li>
+                    <li><strong>Use of Data:</strong> Submitted information is processed solely for peer-to-peer problem-solving, database querying, and software utility functionality.</li>
+                    <li><strong>Data Security:</strong> All records are stored securely using cloud database encryption protocols. We do not sell or share user data with third-party commercial advertisers.</li>
+                    <li><strong>Contact:</strong> For privacy inquiries or activation support regarding your software license, contact us at 0917 551 9510.</li>
+                </ul>
+            </div>
+
+            <!-- Minimalist Copyright Footer matching source[cite: 1] -->
+            <div class="footer">
+                &copy; 2026 Bizave. All Rights Reserved. <br>
+                BIZAVE&reg; is a Registered Trademark.
+            </div>
+        </div>
+    </div>
+
     <script>
+        function enterApp() {
+            document.getElementById('landingView').style.display = 'none';
+            document.getElementById('appView').style.display = 'block';
+        }
+
         const firebaseConfig = {
             apiKey: "AIzaSyCuHLmUpAUcfjHMz6KciWD5bUfvPnKnKHM",
             authDomain: "bizave-1cb28.firebaseapp.com",
