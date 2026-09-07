@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bizave | life's tool at your hands</title>
+    <title>Bizave | Life's tool at your hands</title>
     
     <!-- Firebase Cloud Database SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -12,8 +12,8 @@
     <style>
         :root {
             --cyan: #00AEEF;
-            --dark-gray: #1e293b;
-            --light-bg: #f8fafc;
+            --dark-gray: #1a1a1a;
+            --light-bg: #ffffff;
             --border-color: #cbd5e1;
             --green: #16a34a;
             --pro-gold: #d97706;
@@ -22,48 +22,50 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background-color: var(--light-bg);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             color: var(--dark-gray);
         }
 
+        /* Minimalist Brand Header Style */
         header {
+            text-align: center;
+            padding: 40px 20px 20px 20px;
             background: #ffffff;
-            border-bottom: 3px solid var(--cyan);
-            padding: 16px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .brand-section h1 {
+        .logo {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #555;
+            letter-spacing: 0.5px;
             margin: 0;
-            font-size: 20px;
-            color: var(--cyan);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-section p {
-            margin: 2px 0 0 0;
-            font-size: 12px;
-            color: #64748b;
-            font-weight: 500;
         }
 
         .system-status {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 12px;
+            gap: 6px;
+            font-size: 11px;
             color: #475569;
             font-weight: 600;
+            margin-top: 10px;
+            background: #f1f5f9;
+            padding: 4px 10px;
+            border-radius: 20px;
         }
 
         .status-dot {
-            height: 8px;
-            width: 8px;
+            height: 6px;
+            width: 6px;
             background-color: var(--green);
             border-radius: 50%;
             display: inline-block;
@@ -92,29 +94,31 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 24px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
             margin-bottom: 20px;
         }
 
         .panel h3 {
             margin: 0 0 16px 0;
-            font-size: 16px;
+            font-size: 15px;
             color: var(--dark-gray);
             border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 12px;
+            padding-bottom: 10px;
             font-weight: 700;
+            text-transform: lowercase;
         }
 
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .form-group label {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             color: #475569;
+            text-transform: lowercase;
         }
 
         .form-group input, .form-group textarea, .form-group select {
@@ -123,10 +127,10 @@
             padding: 10px 14px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 13px;
             background: #ffffff;
             font-family: inherit;
-            color: #1e293b;
+            color: #1a1a1a;
         }
 
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
@@ -143,7 +147,7 @@
             border-radius: 6px;
             width: 100%;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -160,7 +164,7 @@
             border-radius: 6px;
             width: 100%;
             font-weight: 700;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             transition: opacity 0.2s;
         }
@@ -173,10 +177,10 @@
             background: #e2e8f0;
             color: #475569;
             border: none;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -189,9 +193,9 @@
             background: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 18px;
-            margin-bottom: 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.02);
         }
 
         .problem-header {
@@ -203,15 +207,15 @@
 
         .problem-card h4 {
             margin: 0;
-            font-size: 16px;
+            font-size: 15px;
             color: var(--cyan);
             font-weight: 700;
         }
 
         .problem-badge {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
-            padding: 3px 8px;
+            padding: 3px 6px;
             border-radius: 4px;
             background: #e0f2fe;
             color: #0369a1;
@@ -219,17 +223,17 @@
         }
 
         .problem-meta {
-            font-size: 12px;
+            font-size: 11px;
             color: #64748b;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 500;
         }
 
         .problem-card p {
-            margin: 0 0 12px 0;
-            font-size: 13px;
+            margin: 0 0 10px 0;
+            font-size: 12px;
             color: #334155;
-            line-height: 1.5;
+            line-height: 1.4;
         }
 
         .problem-footer {
@@ -237,8 +241,8 @@
             justify-content: space-between;
             align-items: center;
             border-top: 1px solid #f1f5f9;
-            padding-top: 10px;
-            font-size: 12px;
+            padding-top: 8px;
+            font-size: 11px;
         }
 
         .solver-tag {
@@ -256,67 +260,69 @@
 
         .pro-box h4 {
             margin: 0 0 6px 0;
-            font-size: 14px;
+            font-size: 13px;
             color: #b45309;
             font-weight: 700;
         }
 
         .pro-box p {
             margin: 0 0 10px 0;
-            font-size: 12px;
+            font-size: 11px;
             color: #78350f;
             line-height: 1.4;
         }
 
         .usage-badge {
             font-size: 11px;
-            background: #e2e8f0;
+            background: #f1f5f9;
             color: #475569;
-            padding: 3px 8px;
+            padding: 4px 8px;
             border-radius: 4px;
             font-weight: 600;
             display: inline-block;
             margin-bottom: 12px;
         }
 
-        /* Privacy Policy Section */
         .privacy-panel {
             background: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 24px;
             margin-top: 30px;
-            font-size: 13px;
+            font-size: 12px;
             color: #475569;
             line-height: 1.6;
         }
 
         .privacy-panel h4 {
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             color: var(--dark-gray);
-            font-size: 15px;
+            font-size: 14px;
         }
 
-        footer {
+        /* Minimalist Footer Style matching source[cite: 1] */
+        .footer {
             text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            font-size: 12px;
-            color: #94a3b8;
-            border-top: 1px solid #e2e8f0;
+            margin: 40px 0;
+            font-size: 0.75rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
+    <!-- Minimalist Brand Header Layout[cite: 1] -->
     <header>
-        <div class="brand-section">
-            <h1>bizave</h1>
-            <p>life's tool at your hands</p>
-        </div>
-        <div class="system-status">
-            <span class="status-dot"></span>
-            <span id="licenseStatusText">standard license (5 posts/day limit)</span>
+        <div class="container">
+            <img src="logo.png" alt="Bizave Logo" class="logo">
+            <div class="tagline">Life's tool at your hands.</div>
+            <div class="system-status">
+                <span class="status-dot"></span>
+                <span id="licenseStatusText">standard license (5 posts/day limit)</span>
+            </div>
         </div>
     </header>
 
@@ -384,7 +390,7 @@
                 </div>
 
                 <div id="feedContainer">
-                    <p style="color: #94a3b8; font-size: 13px;">connecting to live database...</p>
+                    <p style="color: #94a3b8; font-size: 12px;">connecting to live database...</p>
                 </div>
             </div>
 
@@ -393,8 +399,8 @@
         <!-- BUILT-IN DATA PRIVACY POLICY SECTION -->
         <div class="privacy-panel">
             <h4>bizave data privacy policy</h4>
-            <p>At <strong>bizave</strong> ("life's tool at your hands"), we respect and protect your privacy. This policy outlines how we handle data within our software application:</p>
-            <ul style="margin: 8px 0; padding-left: 20px;">
+            <p>At <strong>bizave</strong> ("life's tool at your hands"[cite: 1]), we respect and protect your privacy. This policy outlines how we handle data within our software application:</p>
+            <ul style="margin: 6px 0; padding-left: 18px;">
                 <li><strong>Information Collection:</strong> We collect problem descriptions, category selections, and optional contact details voluntarily submitted by users into our real-time database ledger.</li>
                 <li><strong>Use of Data:</strong> Submitted information is processed solely for peer-to-peer problem-solving, database querying, and software utility functionality.</li>
                 <li><strong>Data Security:</strong> All records are stored securely using cloud database encryption protocols. We do not sell or share user data with third-party commercial advertisers.</li>
@@ -402,9 +408,11 @@
             </ul>
         </div>
 
-        <footer>
-            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (software & digital data utilities).
-        </footer>
+        <!-- Minimalist Copyright Footer matching source[cite: 1] -->
+        <div class="footer">
+            &copy; 2026 Bizave. All Rights Reserved. <br>
+            BIZAVE&reg; is a Registered Trademark.
+        </div>
     </div>
 
     <script>
@@ -525,7 +533,7 @@
             });
 
             if (count === 0) {
-                container.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
+                container.innerHTML = `<p style="color: #94a3b8; font-size: 12px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
             }
         }
 
