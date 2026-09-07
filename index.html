@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIZAVE | Life's tool at your hands</title>
+    <title>bizave | life's tool at your hands</title>
     
     <!-- Firebase Cloud Database SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -113,13 +113,14 @@
             font-size: 18px;
             color: var(--cyan);
             font-weight: 800;
+            text-transform: lowercase;
         }
 
         .brand-titles p {
             margin: 2px 0 0 0;
             font-size: 9px;
             color: var(--dark-gray);
-            text-transform: uppercase;
+            text-transform: lowercase;
             font-weight: 700;
         }
 
@@ -251,15 +252,15 @@
 </head>
 <body>
 
-    <!-- 1. SPLASH / LANDING PAGE VIEW -->
+    <!-- 1. SPLASH / LANDING VIEW -->
     <div id="splash-view">
-        <img src="logo.png" alt="Bizave Logo" class="splash-logo">
-        <div class="splash-tagline">Life's tool at your hands.</div>
-        <button class="btn-enter-app" onclick="toggleView('workspace')">Launch Software Workspace</button>
+        <img src="logo.png" alt="bizave logo" class="splash-logo">
+        <div class="splash-tagline">life's tool at your hands.</div>
+        <button class="btn-enter-app" onclick="toggleView('workspace')">launch software workspace</button>
         
         <div class="splash-footer">
-            &copy; 2026 Bizave. All Rights Reserved. <br>
-            BIZAVE&reg; is a Registered Trademark (Class 9).
+            &copy; 2026 bizave. all rights reserved. <br>
+            bizave&reg; is a registered trademark (class 9).
         </div>
     </div>
 
@@ -267,93 +268,93 @@
     <div id="workspace-view">
         <header>
             <div class="brand-section">
-                <img src="logo.png" alt="Bizave Logo" class="app-logo">
+                <img src="logo.png" alt="bizave logo" class="app-logo">
                 <div class="brand-titles">
-                    <h1>BIZAVE</h1>
-                    <p>Class 9 Software Suite</p>
+                    <h1>bizave</h1>
+                    <p>life's tool at your hands</p>
                 </div>
             </div>
             <div style="display: flex; align-items: center; gap: 15px; font-size: 13px;">
-                <span>Session: <strong>Authorized Operator</strong></span>
-                <button class="btn-enter-app" style="padding: 6px 14px; font-size: 12px;" onclick="toggleView('splash')">Back to Home</button>
+                <span>session: <strong>authorized operator</strong></span>
+                <button class="btn-enter-app" style="padding: 6px 14px; font-size: 12px;" onclick="toggleView('splash')">back to home</button>
             </div>
         </header>
 
         <div class="main-container">
             <div class="workspace-grid">
                 
-                <!-- Entry Module (Clean & Empty) -->
+                <!-- Entry Module -->
                 <div class="panel">
-                    <h3>Equipment & Asset Entry Module</h3>
+                    <h3>equipment & asset entry module</h3>
                     <div class="form-group">
-                        <label>Item Name / Commercial Title</label>
-                        <input type="text" id="itemName" placeholder="e.g., Asset / Equipment Name">
+                        <label>item name / commercial title</label>
+                        <input type="text" id="itemName" placeholder="e.g., asset / equipment name">
                     </div>
                     <div class="form-group">
-                        <label>Lawful Commercial & Class 9 Category</label>
+                        <label>lawful commercial & class 9 category</label>
                         <select id="itemCategory">
-                            <optgroup label="Software, Digital & IT (Class 9)">
-                                <option>Computer Software Applications & Mobile Apps</option>
-                                <option>Recorded & Downloadable Operating Programs</option>
-                                <option>Computers, Laptops & Data Processing Hardware</option>
-                                <option>Computer Peripherals, Storage & Networking Devices</option>
+                            <optgroup label="software, digital & IT (class 9)">
+                                <option>computer software applications & mobile apps</option>
+                                <option>recorded & downloadable operating programs</option>
+                                <option>computers, laptops & data processing hardware</option>
+                                <option>computer peripherals, storage & networking devices</option>
                             </optgroup>
-                            <optgroup label="Electrical, Electronics & Instruments">
-                                <option>Electrical Switches, Sockets, Wires & Cables</option>
-                                <option>Electrical Distribution, Controlling & Accumulating Apparatus</option>
-                                <option>Consumer Electronics & Office Appliances</option>
-                                <option>Scientific, Measuring, Testing & Optical Instruments</option>
-                                <option>Telecommunications & Communication Devices</option>
-                                <option>Safety, Security, Alarm & Surveillance Systems</option>
+                            <optgroup label="electrical, electronics & instruments">
+                                <option>electrical switches, sockets, wires & cables</option>
+                                <option>electrical distribution, controlling & accumulating apparatus</option>
+                                <option>consumer electronics & office appliances</option>
+                                <option>scientific, measuring, testing & optical instruments</option>
+                                <option>telecommunications & communication devices</option>
+                                <option>safety, security, alarm & surveillance systems</option>
                             </optgroup>
-                            <optgroup label="Hardware, Tools & Construction">
-                                <option>Industrial Tools, Machinery & Workshop Equipment</option>
-                                <option>Plumbing Fittings, Pipes, Valves & Fixtures</option>
-                                <option>Construction Materials, Building Hardware & Fixtures</option>
-                                <option>Hand Tools, Fasteners & General Hardware</option>
+                            <optgroup label="hardware, tools & construction">
+                                <option>industrial tools, machinery & workshop equipment</option>
+                                <option>plumbing fittings, pipes, valves & fixtures</option>
+                                <option>construction materials, building hardware & fixtures</option>
+                                <option>hand tools, fasteners & general hardware</option>
                             </optgroup>
-                            <optgroup label="Automotive & Transport">
-                                <option>Automotive Wheels, Rims, Tires & Rubber Goods</option>
-                                <option>Automotive Spare Parts, Accessories & Electronics</option>
-                                <option>Bicycle & Two-Wheeler Parts & Accessories</option>
+                            <optgroup label="automotive & transport">
+                                <option>automotive wheels, rims, tires & rubber goods</option>
+                                <option>automotive spare parts, accessories & electronics</option>
+                                <option>bicycle & two-wheeler parts & accessories</option>
                             </optgroup>
-                            <optgroup label="General Retail & Commercial Assets">
-                                <option>Office Furniture, Desks & Storage Units</option>
-                                <option>Commercial Retail Goods & General Merchandise</option>
+                            <optgroup label="general retail & commercial assets">
+                                <option>office furniture, desks & storage units</option>
+                                <option>commercial retail goods & general merchandise</option>
                             </optgroup>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Item Condition</label>
+                        <label>item condition</label>
                         <select id="itemCondition">
-                            <option>Brand New</option>
-                            <option>Secondhand / Used</option>
+                            <option>brand new</option>
+                            <option>secondhand / used</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Listing Price (PHP)</label>
+                        <label>listing price (php)</label>
                         <input type="number" id="itemPrice" placeholder="e.g., 5000">
                     </div>
                     <div class="form-group">
-                        <label>Contact Cellphone Number</label>
-                        <input type="text" id="itemContact" placeholder="+63 917 XXX XXXX">
+                        <label>contact cellphone number</label>
+                        <input type="text" id="itemContact" placeholder="+63 917 xxx xxxx">
                     </div>
                     <div class="form-group">
-                        <label>Upload Item Image / Photo</label>
+                        <label>upload item image / photo</label>
                         <input type="file" id="itemImageFile" accept="image/*">
                     </div>
                     <div class="form-group">
-                        <label>Technical Specifications / Condition Notes</label>
-                        <textarea id="itemDesc" rows="2" placeholder="Describe technical specifications, model, or condition..."></textarea>
+                        <label>technical specifications / condition notes</label>
+                        <textarea id="itemDesc" rows="2" placeholder="describe technical specifications, model, or condition..."></textarea>
                     </div>
-                    <button class="btn-submit" onclick="executeListing()">Post to Commercial Cloud Ledger</button>
+                    <button class="btn-submit" onclick="executeListing()">post to commercial cloud ledger</button>
                 </div>
 
                 <!-- Cloud Ledger Feed -->
                 <div class="panel" style="background: #ffffff;">
-                    <h3>Application Commercial Ledger (Persistent Cloud)</h3>
+                    <h3>application commercial ledger (persistent cloud)</h3>
                     <div id="ledgerFeed">
-                        <p id="loadingMsg" style="color: #94a3b8; font-size: 13px;">Connecting to cloud database...</p>
+                        <p id="loadingMsg" style="color: #94a3b8; font-size: 13px;">connecting to cloud database...</p>
                     </div>
                 </div>
 
@@ -388,9 +389,9 @@
                 ledger.innerHTML = `
                     <div class="listing-card">
                         <div class="listing-details">
-                            <h4>Enterprise Software Suite v3.2</h4>
-                            <div class="listing-meta">Brand New • Computer Software Applications</div>
-                            <p>Cloud architecture • Multi-terminal execution license</p>
+                            <h4>enterprise software suite v3.2</h4>
+                            <div class="listing-meta">brand new • computer software applications</div>
+                            <p>cloud architecture • multi-terminal execution license</p>
                             <div class="listing-footer-row">
                                 <span class="listing-price">₱ 4,500</span>
                                 <span class="contact-tag">📞 +63 917 555 0192</span>
@@ -403,7 +404,7 @@
 
             Object.keys(data).reverse().forEach(key => {
                 const item = data[key];
-                const imageTag = item.image ? `<img src="${item.image}" class="listing-img-thumb" alt="Item Image">` : `<div class="listing-img-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:#94a3b8;">No Image</div>`;
+                const imageTag = item.image ? `<img src="${item.image}" class="listing-img-thumb" alt="item image">` : `<div class="listing-img-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:#94a3b8;">no image</div>`;
                 
                 const card = document.createElement('div');
                 card.className = 'listing-card';
@@ -434,7 +435,7 @@
             const fileInput = document.getElementById('itemImageFile');
 
             if (!name || !price) {
-                alert("Please complete the required item name and price fields.");
+                alert("please complete the required item name and price fields.");
                 return;
             }
 
