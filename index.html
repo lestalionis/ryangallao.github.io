@@ -146,7 +146,7 @@
 
         .panel h3 {
             margin: 0 0 16px 0;
-            font-size: 16px;
+            font-size: 15px;
             color: var(--dark-gray);
             border-bottom: 1px solid #e2e8f0;
             padding-bottom: 10px;
@@ -352,7 +352,7 @@
 
                 <!-- Cloud Ledger Feed -->
                 <div class="panel" style="background: #ffffff;">
-                    <h3>application commercial ledger (persistent cloud)</h3>
+                    <h3>active listings feed — please contact the seller via the listed number</h3>
                     <div id="ledgerFeed">
                         <p id="loadingMsg" style="color: #94a3b8; font-size: 13px;">connecting to cloud database...</p>
                     </div>
@@ -479,10 +479,6 @@
                 fileInput.value = '';
             }
         }
-
-        (function clearOldTests() {
-            // Optional auto-clean helper if needed
-        })();
 
         function toggleView(target) {
             if (target === 'workspace') {
