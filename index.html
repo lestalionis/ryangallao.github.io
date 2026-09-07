@@ -12,9 +12,10 @@
     <style>
         :root {
             --cyan: #00AEEF;
-            --dark-gray: #333333;
-            --light-bg: #ffffff;
+            --dark-gray: #1e293b;
+            --light-bg: #f8fafc;
             --border-color: #cbd5e1;
+            --green: #16a34a;
         }
 
         body {
@@ -25,104 +26,51 @@
             color: var(--dark-gray);
         }
 
-        /* --- SPLASH / LANDING VIEW --- */
-        #splash-view {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .splash-logo {
-            max-width: 280px;
-            width: 100%;
-            height: auto;
-            margin-bottom: 25px;
-        }
-
-        .splash-tagline {
-            font-size: 1.25rem;
-            font-weight: 400;
-            color: #555;
-            letter-spacing: 0.5px;
-            margin-bottom: 30px;
-        }
-
-        .btn-enter-app {
-            background: var(--dark-gray);
-            color: #ffffff;
-            border: none;
-            padding: 10px 24px;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            letter-spacing: 0.5px;
-            transition: background 0.2s;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-
-        .btn-enter-app:hover {
-            background: var(--cyan);
-        }
-
-        .splash-footer {
-            position: absolute;
-            bottom: 30px;
-            font-size: 0.75rem;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-
-        /* --- SOFTWARE WORKSPACE VIEW --- */
-        #workspace-view {
-            display: none;
-            background: #f8fafc;
-            min-height: 100vh;
-            padding-bottom: 50px;
-        }
-
         header {
             background: #ffffff;
             border-bottom: 3px solid var(--cyan);
-            padding: 12px 30px;
+            padding: 16px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.03);
         }
 
         .brand-section {
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column;
         }
 
-        .app-logo {
-            height: 35px;
-            width: auto;
-        }
-
-        .brand-titles h1 {
+        .brand-section h1 {
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--cyan);
             font-weight: 800;
-            text-transform: lowercase;
+            letter-spacing: -0.5px;
         }
 
-        .brand-titles p {
+        .brand-section p {
             margin: 2px 0 0 0;
-            font-size: 9px;
-            color: var(--dark-gray);
-            text-transform: lowercase;
-            font-weight: 700;
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--green);
+            border-radius: 50%;
+            display: inline-block;
         }
 
         .main-container {
@@ -133,240 +81,250 @@
 
         .workspace-grid {
             display: grid;
-            grid-template-columns: 420px 1fr;
+            grid-template-columns: 380px 1fr;
             gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .workspace-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .panel {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
         }
 
         .panel h3 {
             margin: 0 0 16px 0;
-            font-size: 15px;
+            font-size: 16px;
             color: var(--dark-gray);
             border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
             font-size: 12px;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: #475569;
         }
 
         .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             box-sizing: border-box;
-            padding: 9px 12px;
+            padding: 10px 14px;
             border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 13px;
+            border-radius: 6px;
+            font-size: 14px;
             background: #ffffff;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: inherit;
+            color: #1e293b;
         }
 
-        .btn-submit {
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.1);
+        }
+
+        .btn-primary {
             background: var(--cyan);
             color: white;
             border: none;
             padding: 12px;
-            border-radius: 4px;
+            border-radius: 6px;
             width: 100%;
             font-weight: 700;
             font-size: 14px;
             cursor: pointer;
-            margin-top: 5px;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            transition: background 0.2s;
         }
 
-        .listing-card {
+        .btn-primary:hover {
+            background: #0095cc;
+        }
+
+        .btn-export {
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-export:hover {
+            background: #cbd5e1;
+        }
+
+        .problem-card {
             background: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 16px;
+            padding: 18px;
             margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: transform 0.1s;
+        }
+
+        .problem-card:hover {
+            border-color: var(--cyan);
+        }
+
+        .problem-header {
             display: flex;
-            gap: 16px;
-            align-items: center;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
         }
 
-        .listing-img-thumb {
-            width: 90px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 4px;
-            border: 1px solid #e2e8f0;
-            background: #f1f5f9;
-        }
-
-        .listing-details {
-            flex-grow: 1;
-        }
-
-        .listing-details h4 {
-            margin: 0 0 3px 0;
-            font-size: 15px;
+        .problem-card h4 {
+            margin: 0;
+            font-size: 16px;
             color: var(--cyan);
+            font-weight: 700;
         }
 
-        .listing-meta {
-            font-size: 11px;
-            color: #64748b;
-            margin-bottom: 4px;
-            font-weight: 600;
+        .problem-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: #e0f2fe;
+            color: #0369a1;
             text-transform: uppercase;
         }
 
-        .listing-details p {
-            margin: 0 0 6px 0;
+        .problem-meta {
             font-size: 12px;
-            color: #475569;
+            color: #64748b;
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
-        .listing-footer-row {
+        .problem-card p {
+            margin: 0 0 12px 0;
+            font-size: 13px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .problem-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .listing-price {
-            font-size: 15px;
-            font-weight: 800;
-            color: #166534;
-        }
-
-        .contact-tag {
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
             font-size: 12px;
-            color: #334155;
-            font-weight: 700;
+        }
+
+        .solver-tag {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 12px;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. SPLASH / LANDING VIEW -->
-    <div id="splash-view">
-        <img src="logo.png" alt="bizave logo" class="splash-logo">
-        <div class="splash-tagline">life's tool at your hands.</div>
-        <button class="btn-enter-app" onclick="toggleView('workspace')">launch software workspace</button>
+    <!-- HEADER -->
+    <header>
+        <div class="brand-section">
+            <h1>bizave</h1>
+            <p>life's tool at your hands</p>
+        </div>
+        <div class="system-status">
+            <span class="status-dot"></span>
+            <span>live database online</span>
+        </div>
+    </header>
+
+    <div class="main-container">
         
-        <div class="splash-footer">
-            &copy; 2026 bizave. all rights reserved. <br>
-            bizave&reg; is a registered trademark (class 9).
+        <div class="workspace-grid">
+            
+            <!-- LEFT PANEL: SUBMIT A PROBLEM OR SOLUTION -->
+            <div class="panel">
+                <h3>submit problem & solution</h3>
+                <div class="form-group">
+                    <label>problem / challenge title</label>
+                    <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
+                </div>
+                <div class="form-group">
+                    <label>category</label>
+                    <select id="problemCategory">
+                        <option>technical & IT troubleshooting</option>
+                        <option>software & application support</option>
+                        <option>hardware & equipment repair</option>
+                        <option>daily life & practical solutions</option>
+                        <option>general inquiries & advice</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>status</label>
+                    <select id="problemStatus">
+                        <option>seeking solution</option>
+                        <option>solution found / resolved</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>contact or contributor name</label>
+                    <input type="text" id="problemContact" placeholder="e.g., alex / +63 917 xxx xxxx">
+                </div>
+                <div class="form-group">
+                    <label>describe the problem & proposed solution</label>
+                    <textarea id="problemDesc" rows="4" placeholder="share details about the problem and how it can be solved..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
+            </div>
+
+            <!-- RIGHT PANEL: COMMUNITY PROBLEMS & SOLUTIONS FEED -->
+            <div class="panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
+                    <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
+                    <button class="btn-export" onclick="exportCSV()">export records (.csv)</button>
+                </div>
+
+                <!-- Search / Query Bar -->
+                <div style="margin-bottom: 16px;">
+                    <input type="text" id="searchQuery" placeholder="search problems, solutions, or categories..." onkeyup="filterFeed()" style="width: 100%; padding: 10px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 13px;">
+                </div>
+
+                <div id="feedContainer">
+                    <p style="color: #94a3b8; font-size: 13px;">connecting to live database...</p>
+                </div>
+            </div>
+
         </div>
-    </div>
 
-    <!-- 2. SOFTWARE WORKSPACE VIEW -->
-    <div id="workspace-view">
-        <header>
-            <div class="brand-section">
-                <img src="logo.png" alt="bizave logo" class="app-logo">
-                <div class="brand-titles">
-                    <h1>bizave</h1>
-                    <p>life's tool at your hands</p>
-                </div>
-            </div>
-            <div style="display: flex; align-items: center; gap: 15px; font-size: 13px;">
-                <span>session: <strong>authorized operator</strong></span>
-                <button class="btn-enter-app" style="padding: 6px 14px; font-size: 12px;" onclick="toggleView('splash')">back to home</button>
-            </div>
-        </header>
-
-        <div class="main-container">
-            <div class="workspace-grid">
-                
-                <!-- Entry Module -->
-                <div class="panel">
-                    <h3>equipment & asset entry module</h3>
-                    <div class="form-group">
-                        <label>item name / commercial title</label>
-                        <input type="text" id="itemName" placeholder="e.g., asset / equipment name">
-                    </div>
-                    <div class="form-group">
-                        <label>item category</label>
-                        <select id="itemCategory">
-                            <optgroup label="software, digital & IT (class 9)">
-                                <option>computer software applications & mobile apps</option>
-                                <option>recorded & downloadable operating programs</option>
-                                <option>computers, laptops & data processing hardware</option>
-                                <option>computer peripherals, storage & networking devices</option>
-                            </optgroup>
-                            <optgroup label="electrical, electronics & instruments">
-                                <option>electrical switches, sockets, wires & cables</option>
-                                <option>electrical distribution, controlling & accumulating apparatus</option>
-                                <option>consumer electronics & office appliances</option>
-                                <option>scientific, measuring, testing & optical instruments</option>
-                                <option>telecommunications & communication devices</option>
-                                <option>safety, security, alarm & surveillance systems</option>
-                            </optgroup>
-                            <optgroup label="hardware, tools & construction">
-                                <option>industrial tools, machinery & workshop equipment</option>
-                                <option>plumbing fittings, pipes, valves & fixtures</option>
-                                <option>construction materials, building hardware & fixtures</option>
-                                <option>hand tools, fasteners & general hardware</option>
-                            </optgroup>
-                            <optgroup label="automotive & transport">
-                                <option>automotive wheels, rims, tires & rubber goods</option>
-                                <option>automotive spare parts, accessories & electronics</option>
-                                <option>bicycle & two-wheeler parts & accessories</option>
-                            </optgroup>
-                            <optgroup label="general retail & commercial assets">
-                                <option>office furniture, desks & storage units</option>
-                                <option>commercial retail goods & general merchandise</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>item condition</label>
-                        <select id="itemCondition">
-                            <option>brand new</option>
-                            <option>secondhand / used</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>listing price (php)</label>
-                        <input type="number" id="itemPrice" placeholder="e.g., 5000">
-                    </div>
-                    <div class="form-group">
-                        <label>contact cellphone number</label>
-                        <input type="text" id="itemContact" placeholder="+63 917 xxx xxxx">
-                    </div>
-                    <div class="form-group">
-                        <label>upload item image / photo</label>
-                        <input type="file" id="itemImageFile" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label>technical specifications / condition notes</label>
-                        <textarea id="itemDesc" rows="2" placeholder="describe technical specifications, model, or condition..."></textarea>
-                    </div>
-                    <button class="btn-submit" onclick="executeListing()">post to commercial cloud ledger</button>
-                </div>
-
-                <!-- Cloud Ledger Feed -->
-                <div class="panel" style="background: #ffffff;">
-                    <h3>active listings feed — please contact the seller via the listed number</h3>
-                    <div id="ledgerFeed">
-                        <p id="loadingMsg" style="color: #94a3b8; font-size: 13px;">connecting to cloud database...</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+        <footer>
+            &copy; 2026 bizave &bull; life's tool at your hands. registered trademark under class 9 (software & digital data utilities).
+        </footer>
     </div>
 
     <script>
-        // Your Firebase Configuration Keys
         const firebaseConfig = {
             apiKey: "AIzaSyCuHLmUpAUcfjHMz6KciWD5bUfvPnKnKHM",
             authDomain: "bizave-1cb28.firebaseapp.com",
@@ -377,120 +335,124 @@
             appId: "1:595993179596:web:bc9989f13542cbd8831969"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const listingsRef = db.ref('bizave_listings');
+        const problemsRef = db.ref('bizave_problems');
 
-        // Real-Time Listener
-        listingsRef.on('value', (snapshot) => {
-            const ledger = document.getElementById('ledgerFeed');
-            ledger.innerHTML = '';
+        let globalCache = {};
 
+        problemsRef.on('value', (snapshot) => {
             const data = snapshot.val();
+            const container = document.getElementById('feedContainer');
+            
             if (!data) {
-                ledger.innerHTML = `
-                    <div class="listing-card">
-                        <div class="listing-details">
-                            <h4>enterprise software suite v3.2</h4>
-                            <div class="listing-meta">brand new • computer software applications</div>
-                            <p>cloud architecture • multi-terminal execution license</p>
-                            <div class="listing-footer-row">
-                                <span class="listing-price">₱ 4,500</span>
-                                <span class="contact-tag">📞 +63 917 555 0192</span>
-                            </div>
+                globalCache = {};
+                container.innerHTML = `
+                    <div class="problem-card">
+                        <div class="problem-header">
+                            <h4>welcome to bizave problem solving</h4>
+                            <span class="problem-badge">seeking solution</span>
+                        </div>
+                        <div class="problem-meta">technical & IT troubleshooting &bull; posted by admin</div>
+                        <p>share your challenges here and connect with community-driven solutions. life's tool at your hands.</p>
+                        <div class="problem-footer">
+                            <span class="solver-tag">contact: support@bizave.io</span>
                         </div>
                     </div>
                 `;
                 return;
             }
 
-            Object.keys(data).reverse().forEach(key => {
-                const item = data[key];
-                const imageTag = item.image ? `<img src="${item.image}" class="listing-img-thumb" alt="item image">` : `<div class="listing-img-thumb" style="display:flex;align-items:center;justify-content:center;font-size:10px;color:#94a3b8;">no image</div>`;
-                
-                const card = document.createElement('div');
-                card.className = 'listing-card';
-                card.innerHTML = `
-                    ${imageTag}
-                    <div class="listing-details">
-                        <h4>${item.name}</h4>
-                        <div class="listing-meta">${item.condition} • ${item.category}</div>
-                        <p>${item.desc}</p>
-                        <div class="listing-footer-row">
-                            <span class="listing-price">₱ ${parseInt(item.price).toLocaleString()}</span>
-                            <span class="contact-tag">📞 ${item.contact}</span>
-                        </div>
-                    </div>
-                `;
-                ledger.appendChild(card);
-            });
+            globalCache = data;
+            renderFeed(Object.keys(data).reverse(), data);
         });
 
-        // Write function to Cloud Database with Image Conversion
-        function executeListing() {
-            const name = document.getElementById('itemName').value;
-            const category = document.getElementById('itemCategory').value;
-            const condition = document.getElementById('itemCondition').value;
-            const price = document.getElementById('itemPrice').value;
-            const contact = document.getElementById('itemContact').value;
-            const desc = document.getElementById('itemDesc').value;
-            const fileInput = document.getElementById('itemImageFile');
+        function renderFeed(keys, data) {
+            const container = document.getElementById('feedContainer');
+            container.innerHTML = '';
+            const query = document.getElementById('searchQuery').value.toLowerCase();
 
-            if (!name || !price) {
-                alert("please complete the required item name and price fields.");
-                return;
-            }
+            let count = 0;
+            keys.forEach(key => {
+                const item = data[key];
+                const searchable = `${item.title} ${item.category} ${item.status} ${item.desc} ${item.contact}`.toLowerCase();
 
-            if (fileInput.files && fileInput.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    listingsRef.push({
-                        name: name,
-                        category: category,
-                        condition: condition,
-                        price: price,
-                        contact: contact,
-                        desc: desc,
-                        image: e.target.result,
-                        timestamp: Date.now()
-                    });
-                    // Clear inputs after posting
-                    document.getElementById('itemName').value = '';
-                    document.getElementById('itemPrice').value = '';
-                    document.getElementById('itemContact').value = '';
-                    document.getElementById('itemDesc').value = '';
-                    fileInput.value = '';
-                };
-                reader.readAsDataURL(fileInput.files[0]);
-            } else {
-                listingsRef.push({
-                    name: name,
-                    category: category,
-                    condition: condition,
-                    price: price,
-                    contact: contact,
-                    desc: desc,
-                    image: "",
-                    timestamp: Date.now()
-                });
-                // Clear inputs after posting
-                document.getElementById('itemName').value = '';
-                document.getElementById('itemPrice').value = '';
-                document.getElementById('itemContact').value = '';
-                document.getElementById('itemDesc').value = '';
-                fileInput.value = '';
+                if (query && !searchable.includes(query)) return;
+
+                count++;
+                const card = document.createElement('div');
+                card.className = 'problem-card';
+                card.innerHTML = `
+                    <div class="problem-header">
+                        <h4>${item.title}</h4>
+                        <span class="problem-badge">${item.status}</span>
+                    </div>
+                    <div class="problem-meta">${item.category}</div>
+                    <p>${item.desc}</p>
+                    <div class="problem-footer">
+                        <span class="solver-tag">contributor: ${item.contact || 'anonymous'}</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (count === 0) {
+                container.innerHTML = `<p style="color: #94a3b8; font-size: 13px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
             }
         }
 
-        function toggleView(target) {
-            if (target === 'workspace') {
-                document.getElementById('splash-view').style.display = 'none';
-                document.getElementById('workspace-view').style.display = 'block';
-            } else {
-                document.getElementById('workspace-view').style.display = 'none';
-                document.getElementById('splash-view').style.display = 'flex';
+        function filterFeed() {
+            if (globalCache) {
+                renderFeed(Object.keys(globalCache).reverse(), globalCache);
             }
+        }
+
+        function submitProblem() {
+            const title = document.getElementById('problemTitle').value;
+            const category = document.getElementById('problemCategory').value;
+            const status = document.getElementById('problemStatus').value;
+            const contact = document.getElementById('problemContact').value;
+            const desc = document.getElementById('problemDesc5').value || document.getElementById('problemDesc').value;
+
+            if (!title || !desc) {
+                alert("please provide a problem title and description.");
+                return;
+            }
+
+            problemsRef.push({
+                title,
+                category,
+                status,
+                contact,
+                desc,
+                timestamp: Date.now()
+            });
+
+            document.getElementById('problemTitle').value = '';
+            document.getElementById('problemContact').value = '';
+            document.getElementById('problemDesc').value = '';
+        }
+
+        function exportCSV() {
+            if (!globalCache || Object.keys(globalCache).length === 0) {
+                alert("no records to export.");
+                return;
+            }
+
+            let csv = 'id,title,category,status,contributor,description\n';
+            Object.keys(globalCache).forEach(key => {
+                const item = globalCache[key];
+                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'bizave_problem_solving_ledger.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
     </script>
 </body>
