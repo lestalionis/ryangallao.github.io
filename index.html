@@ -262,15 +262,44 @@
         }
 
         .pro-box p {
-            margin: 0 0 12px 0;
+            margin: 0 0 10px 0;
             font-size: 12px;
             color: #78350f;
             line-height: 1.4;
         }
 
+        .usage-badge {
+            font-size: 11px;
+            background: #e2e8f0;
+            color: #475569;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        /* Privacy Policy Section */
+        .privacy-panel {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            margin-top: 30px;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .privacy-panel h4 {
+            margin: 0 0 10px 0;
+            color: var(--dark-gray);
+            font-size: 15px;
+        }
+
         footer {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 30px;
             padding: 20px;
             font-size: 12px;
             color: #94a3b8;
@@ -287,17 +316,19 @@
         </div>
         <div class="system-status">
             <span class="status-dot"></span>
-            <span id="licenseStatusText">standard license active</span>
+            <span id="licenseStatusText">standard license (5 posts/day limit)</span>
         </div>
     </header>
 
     <div class="main-container">
         <div class="workspace-grid">
             
-            <!-- LEFT COLUMN: SUBMISSION & SOFTWARE LICENSING -->
+            <!-- LEFT COLUMN: SUBMISSION & ACTIVATION -->
             <div>
                 <div class="panel">
                     <h3>submit problem & solution</h3>
+                    <div id="usageCounter" class="usage-badge">0 / 5 free submissions used today</div>
+                    
                     <div class="form-group">
                         <label>problem / challenge title</label>
                         <input type="text" id="problemTitle" placeholder="e.g., how to fix intermittent wi-fi drops">
@@ -330,22 +361,22 @@
                     <button class="btn-primary" onclick="submitProblem()">publish to community ledger</button>
                 </div>
 
-                <!-- SOFTWARE MONETIZATION MODULE (CLASS 9 ECONOMIC BENEFIT) -->
+                <!-- MONETIZATION / ACTIVATION MODULE -->
                 <div class="pro-box">
-                    <h4>bizave pro software license</h4>
-                    <p>upgrade to unlock advanced automated matching algorithms, priority cloud syncing, and enterprise data report generation.</p>
+                    <h4>unlock limitless problem solving</h4>
+                    <p>Free tier is capped at 5 problem submissions per day. To solve more problems without limits, contact <strong>0917 551 9510</strong> to get your activation code.</p>
                     <div class="form-group" style="margin-bottom: 10px;">
-                        <input type="text" id="licenseKeyInput" placeholder="enter activation key (e.g., BIZ-PRO-2026)">
+                        <input type="text" id="activationKeyInput" placeholder="enter activation code...">
                     </div>
-                    <button class="btn-pro" onclick="activateProLicense()">activate pro software tier (₱499/mo)</button>
+                    <button class="btn-pro" onclick="activateLicense()">activate limitless access</button>
                 </div>
             </div>
 
-            <!-- RIGHT COLUMN: FEED & ENTERPRISE DATA EXPORT -->
+            <!-- RIGHT COLUMN: FEED & DATA EXPORT -->
             <div class="panel">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px;">
                     <h3 style="margin: 0; border: none; padding: 0;">active problems & solutions ledger</h3>
-                    <button class="btn-export" onclick="exportEnterpriseCSV()">export enterprise dataset (.csv)</button>
+                    <button class="btn-export" onclick="exportCSV()">export records (.csv)</button>
                 </div>
 
                 <div style="margin-bottom: 16px;">
@@ -357,6 +388,18 @@
                 </div>
             </div>
 
+        </div>
+
+        <!-- BUILT-IN DATA PRIVACY POLICY SECTION -->
+        <div class="privacy-panel">
+            <h4>bizave data privacy policy</h4>
+            <p>At <strong>bizave</strong> ("life's tool at your hands"), we respect and protect your privacy. This policy outlines how we handle data within our software application:</p>
+            <ul style="margin: 8px 0; padding-left: 20px;">
+                <li><strong>Information Collection:</strong> We collect problem descriptions, category selections, and optional contact details voluntarily submitted by users into our real-time database ledger.</li>
+                <li><strong>Use of Data:</strong> Submitted information is processed solely for peer-to-peer problem-solving, database querying, and software utility functionality.</li>
+                <li><strong>Data Security:</strong> All records are stored securely using cloud database encryption protocols. We do not sell or share user data with third-party commercial advertisers.</li>
+                <li><strong>Contact:</strong> For privacy inquiries or activation support regarding your software license, contact us at 0917 551 9510.</li>
+            </ul>
         </div>
 
         <footer>
@@ -380,7 +423,17 @@
         const problemsRef = db.ref('bizave_problems');
 
         let globalCache = {};
-        let isProActive = false;
+        let isLimitlessActive = localStorage.getItem('bizave_unlimited') === 'true';
+
+        window.onload = function() {
+            if (isLimitlessActive) {
+                document.getElementById('licenseStatusText').innerText = 'limitless tier active';
+                document.getElementById('licenseStatusText').style.color = '#d97706';
+                document.getElementById('usageCounter').innerText = 'limitless problem solving unlocked';
+            } else {
+                updateUsageDisplay();
+            }
+        };
 
         problemsRef.on('value', (snapshot) => {
             const data = snapshot.val();
@@ -407,6 +460,40 @@
             globalCache = data;
             renderFeed(Object.keys(data).reverse(), data);
         });
+
+        function getDailyUsage() {
+            const today = new Date().toDateString();
+            let record = JSON.parse(localStorage.getItem('bizave_daily_usage') || '{"date":"","count":0}');
+            if (record.date !== today) {
+                record = { date: today, count: 0 };
+                localStorage.setItem('bizave_daily_usage', JSON.stringify(record));
+            }
+            return record;
+        }
+
+        function incrementDailyUsage() {
+            const today = new Date().toDateString();
+            let record = getDailyUsage();
+            record.count += 1;
+            localStorage.setItem('bizave_daily_usage', JSON.stringify(record));
+            updateUsageDisplay();
+        }
+
+        function updateUsageDisplay() {
+            if (isLimitlessActive) return;
+            const record = getDailyUsage();
+            document.getElementById('usageCounter').innerText = `${record.count} / 5 free submissions used today`;
+        }
+
+        function checkDailyLimit() {
+            if (isLimitlessActive) return true;
+            const record = getDailyUsage();
+            if (record.count >= 5) {
+                alert("You have reached your free daily limit of 5 problem submissions. To solve more problems, please contact 0917 551 9510 to get your activation code.");
+                return false;
+            }
+            return true;
+        }
 
         function renderFeed(keys, data) {
             const container = document.getElementById('feedContainer');
@@ -449,6 +536,8 @@
         }
 
         function submitProblem() {
+            if (!checkDailyLimit()) return;
+
             const title = document.getElementById('problemTitle').value;
             const category = document.getElementById('problemCategory').value;
             const status = document.getElementById('problemStatus').value;
@@ -469,41 +558,44 @@
                 timestamp: Date.now()
             });
 
+            incrementDailyUsage();
+
             document.getElementById('problemTitle').value = '';
             document.getElementById('problemContact').value = '';
             document.getElementById('problemDesc').value = '';
         }
 
-        function activateProLicense() {
-            const key = document.getElementById('licenseKeyInput').value.trim();
-            if (key === "" || key.toUpperCase() === "BIZ-PRO-2026") {
-                isProActive = true;
-                document.getElementById('licenseStatusText').innerText = 'bizave pro license active (commercial tier)';
+        function activateLicense() {
+            const code = document.getElementById('activationKeyInput').value.trim();
+            if (code.length > 3) {
+                isLimitlessActive = true;
+                localStorage.setItem('bizave_unlimited', 'true');
+                document.getElementById('licenseStatusText').innerText = 'limitless tier active';
                 document.getElementById('licenseStatusText').style.color = '#d97706';
-                alert("success: pro software license activated. advanced query and compiled analytics unlocked.");
+                document.getElementById('usageCounter').innerText = 'limitless problem solving unlocked';
+                alert("Success! Limitless access has been activated on your software instance.");
             } else {
-                alert("invalid software license activation key.");
+                alert("Invalid activation code. Please contact 0917 551 9510 to get a valid code.");
             }
         }
 
-        function exportEnterpriseCSV() {
+        function exportCSV() {
             if (!globalCache || Object.keys(globalCache).length === 0) {
-                alert("no records available for dataset export.");
+                alert("no records to export.");
                 return;
             }
 
-            let csv = 'record_id,challenge_title,category,resolution_status,contributor_node,parameters_description,license_tier\n';
+            let csv = 'id,title,category,status,contributor,description\n';
             Object.keys(globalCache).forEach(key => {
                 const item = globalCache[key];
-                const tier = isProActive ? 'PRO_COMMERCIAL' : 'STANDARD';
-                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}","${tier}"\n`;
+                csv += `"${key}","${item.title || ''}","${item.category || ''}","${item.status || ''}","${item.contact || ''}","${item.desc || ''}"\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'bizave_commercial_dataset_report.csv';
+            a.download = 'bizave_problem_solving_ledger.csv';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
