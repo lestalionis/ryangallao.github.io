@@ -131,7 +131,7 @@
 
         .workspace-grid {
             display: grid;
-            grid-template-columns: 400px 1fr;
+            grid-template-columns: 420px 1fr;
             gap: 25px;
         }
 
@@ -287,18 +287,23 @@
                     <h3>Equipment & Asset Entry Module</h3>
                     <div class="form-group">
                         <label>Item Name / Commercial Title</label>
-                        <input type="text" id="itemName" placeholder="e.g., Heavy Duty Power Drill">
+                        <input type="text" id="itemName" placeholder="e.g., Software Utility / Hardware Asset">
                     </div>
                     <div class="form-group">
-                        <label>Hardware Category</label>
+                        <label>Hardware & Software Category (Class 9 Scope)</label>
                         <select id="itemCategory">
-                            <option>Automotive Wheels, Rims & Tires</option>
-                            <option>Electrical Switches, Sockets & Wiring</option>
-                            <option>Plumbing Fittings & Hardware Components</option>
-                            <option>Industrial Tools & Mechanical Equipment</option>
-                            <option>Computer Hardware & Peripherals</option>
+                            <option>Computer Software Applications & Mobile Apps (Class 9)</option>
+                            <option>Recorded & Downloadable Media / Operating Programs</option>
+                            <option>Computers, Peripherals & Data Processing Devices</option>
+                            <option>Electrical Distribution, Switching & Controlling Apparatus</option>
+                            <option>Scientific, Research, Navigation & Optical Instruments</option>
+                            <option>Measurement, Testing, Signalling & Inspecting Apparatus</option>
+                            <option>Telecommunications & Networking Equipment</option>
+                            <option>Safety, Security, Alarm & Fire-Extinguishing Devices</option>
+                            <option>Automotive Wheels, Rims, Tires & Mechanical Parts</option>
+                            <option>Industrial Tools, Hardware & Workshop Equipment</option>
+                            <option>Plumbing Fittings, Building Hardware & Fixtures</option>
                             <option>Consumer Electronics & Office Appliances</option>
-                            <option>Construction Materials & Fixtures</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -310,7 +315,7 @@
                     </div>
                     <div class="form-group">
                         <label>Listing Price (PHP)</label>
-                        <input type="number" id="itemPrice" placeholder="e.g., 2500">
+                        <input type="number" id="itemPrice" placeholder="e.g., 5000">
                     </div>
                     <div class="form-group">
                         <label>Contact Cellphone Number</label>
@@ -322,7 +327,7 @@
                     </div>
                     <div class="form-group">
                         <label>Technical Specifications / Condition Notes</label>
-                        <textarea id="itemDesc" rows="2" placeholder="Describe specs, condition, and location..."></textarea>
+                        <textarea id="itemDesc" rows="2" placeholder="Describe technical specs, software version, or physical condition..."></textarea>
                     </div>
                     <button class="btn-submit" onclick="executeListing()">Post to Commercial Cloud Ledger</button>
                 </div>
@@ -366,12 +371,12 @@
                 ledger.innerHTML = `
                     <div class="listing-card">
                         <div class="listing-details">
-                            <h4>Ergonomic Office Desk Chair</h4>
-                            <div class="listing-meta">Brand New • Office Furniture</div>
-                            <p>Baguio Central • High-density mesh backrest</p>
+                            <h4>Enterprise Software Suite v3.2</h4>
+                            <div class="listing-meta">Brand New • Computer Software Applications</div>
+                            <p>Cloud architecture • Multi-terminal execution license</p>
                             <div class="listing-footer-row">
-                                <span class="listing-price">₱ 1,800</span>
-                                <span class="contact-tag">📞 +63 922 555 0192</span>
+                                <span class="listing-price">₱ 4,500</span>
+                                <span class="contact-tag">📞 +63 917 555 0192</span>
                             </div>
                         </div>
                     </div>
