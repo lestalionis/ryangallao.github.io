@@ -287,23 +287,40 @@
                     <h3>Equipment & Asset Entry Module</h3>
                     <div class="form-group">
                         <label>Item Name / Commercial Title</label>
-                        <input type="text" id="itemName" placeholder="e.g., Software Utility / Hardware Asset">
+                        <input type="text" id="itemName" placeholder="e.g., Asset / Equipment Name">
                     </div>
                     <div class="form-group">
-                        <label>Hardware & Software Category (Class 9 Scope)</label>
+                        <label>Lawful Commercial & Class 9 Category</label>
                         <select id="itemCategory">
-                            <option>Computer Software Applications & Mobile Apps (Class 9)</option>
-                            <option>Recorded & Downloadable Media / Operating Programs</option>
-                            <option>Computers, Peripherals & Data Processing Devices</option>
-                            <option>Electrical Distribution, Switching & Controlling Apparatus</option>
-                            <option>Scientific, Research, Navigation & Optical Instruments</option>
-                            <option>Measurement, Testing, Signalling & Inspecting Apparatus</option>
-                            <option>Telecommunications & Networking Equipment</option>
-                            <option>Safety, Security, Alarm & Fire-Extinguishing Devices</option>
-                            <option>Automotive Wheels, Rims, Tires & Mechanical Parts</option>
-                            <option>Industrial Tools, Hardware & Workshop Equipment</option>
-                            <option>Plumbing Fittings, Building Hardware & Fixtures</option>
-                            <option>Consumer Electronics & Office Appliances</option>
+                            <optgroup label="Software, Digital & IT (Class 9)">
+                                <option>Computer Software Applications & Mobile Apps</option>
+                                <option>Recorded & Downloadable Operating Programs</option>
+                                <option>Computers, Laptops & Data Processing Hardware</option>
+                                <option>Computer Peripherals, Storage & Networking Devices</option>
+                            </optgroup>
+                            <optgroup label="Electrical, Electronics & Instruments">
+                                <option>Electrical Switches, Sockets, Wires & Cables</option>
+                                <option>Electrical Distribution, Controlling & Accumulating Apparatus</option>
+                                <option>Consumer Electronics & Office Appliances</option>
+                                <option>Scientific, Measuring, Testing & Optical Instruments</option>
+                                <option>Telecommunications & Communication Devices</option>
+                                <option>Safety, Security, Alarm & Surveillance Systems</option>
+                            </optgroup>
+                            <optgroup label="Hardware, Tools & Construction">
+                                <option>Industrial Tools, Machinery & Workshop Equipment</option>
+                                <option>Plumbing Fittings, Pipes, Valves & Fixtures</option>
+                                <option>Construction Materials, Building Hardware & Fixtures</option>
+                                <option>Hand Tools, Fasteners & General Hardware</option>
+                            </optgroup>
+                            <optgroup label="Automotive & Transport">
+                                <option>Automotive Wheels, Rims, Tires & Rubber Goods</option>
+                                <option>Automotive Spare Parts, Accessories & Electronics</option>
+                                <option>Bicycle & Two-Wheeler Parts & Accessories</option>
+                            </optgroup>
+                            <optgroup label="General Retail & Commercial Assets">
+                                <option>Office Furniture, Desks & Storage Units</option>
+                                <option>Commercial Retail Goods & General Merchandise</option>
+                            </optgroup>
                         </select>
                     </div>
                     <div class="form-group">
@@ -327,7 +344,7 @@
                     </div>
                     <div class="form-group">
                         <label>Technical Specifications / Condition Notes</label>
-                        <textarea id="itemDesc" rows="2" placeholder="Describe technical specs, software version, or physical condition..."></textarea>
+                        <textarea id="itemDesc" rows="2" placeholder="Describe technical specifications, model, or condition..."></textarea>
                     </div>
                     <button class="btn-submit" onclick="executeListing()">Post to Commercial Cloud Ledger</button>
                 </div>
