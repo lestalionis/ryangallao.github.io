@@ -247,17 +247,6 @@
             color: #334155;
             font-weight: 700;
         }
-
-        .btn-inquire {
-            background: var(--dark-gray);
-            color: white;
-            border: none;
-            padding: 7px 12px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -293,12 +282,12 @@
         <div class="main-container">
             <div class="workspace-grid">
                 
-                <!-- Entry Module -->
+                <!-- Entry Module (Clean & Empty) -->
                 <div class="panel">
                     <h3>Equipment & Asset Entry Module</h3>
                     <div class="form-group">
                         <label>Item Name / Commercial Title</label>
-                        <input type="text" id="itemName" value="Mitsubishi Lancer OEM Rims (Set of 4)">
+                        <input type="text" id="itemName" placeholder="e.g., Heavy Duty Power Drill">
                     </div>
                     <div class="form-group">
                         <label>Hardware Category</label>
@@ -316,16 +305,16 @@
                         <label>Item Condition</label>
                         <select id="itemCondition">
                             <option>Brand New</option>
-                            <option selected>Secondhand / Used</option>
+                            <option>Secondhand / Used</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Listing Price (PHP)</label>
-                        <input type="number" id="itemPrice" value="16000">
+                        <input type="number" id="itemPrice" placeholder="e.g., 2500">
                     </div>
                     <div class="form-group">
                         <label>Contact Cellphone Number</label>
-                        <input type="text" id="itemContact" value="+63 917 123 4567">
+                        <input type="text" id="itemContact" placeholder="+63 917 XXX XXXX">
                     </div>
                     <div class="form-group">
                         <label>Upload Item Image / Photo</label>
@@ -333,7 +322,7 @@
                     </div>
                     <div class="form-group">
                         <label>Technical Specifications / Condition Notes</label>
-                        <textarea id="itemDesc" rows="2">Original stock 16-inch alloy rims, 4-hole PCD 114, good condition. Available for direct local pickup in Baguio City.</textarea>
+                        <textarea id="itemDesc" rows="2" placeholder="Describe specs, condition, and location..."></textarea>
                     </div>
                     <button class="btn-submit" onclick="executeListing()">Post to Commercial Cloud Ledger</button>
                 </div>
@@ -423,7 +412,7 @@
             const fileInput = document.getElementById('itemImageFile');
 
             if (!name || !price) {
-                alert("Please complete the required listing fields.");
+                alert("Please complete the required item name and price fields.");
                 return;
             }
 
@@ -440,6 +429,12 @@
                         image: e.target.result,
                         timestamp: Date.now()
                     });
+                    // Clear inputs after posting
+                    document.getElementById('itemName').value = '';
+                    document.getElementById('itemPrice').value = '';
+                    document.getElementById('itemContact').value = '';
+                    document.getElementById('itemDesc').value = '';
+                    fileInput.value = '';
                 };
                 reader.readAsDataURL(fileInput.files[0]);
             } else {
@@ -453,6 +448,12 @@
                     image: "",
                     timestamp: Date.now()
                 });
+                // Clear inputs after posting
+                document.getElementById('itemName').value = '';
+                document.getElementById('itemPrice').value = '';
+                document.getElementById('itemContact').value = '';
+                document.getElementById('itemDesc').value = '';
+                fileInput.value = '';
             }
         }
 
