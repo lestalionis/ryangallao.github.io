@@ -412,7 +412,7 @@
             const category = document.getElementById('problemCategory').value;
             const status = document.getElementById('problemStatus').value;
             const contact = document.getElementById('problemContact').value;
-            const desc = document.getElementById('problemDesc5').value || document.getElementById('problemDesc').value;
+            const desc = document.getElementById('problemDesc').value; // Fixed typo here!
 
             if (!title || !desc) {
                 alert("please provide a problem title and description.");
