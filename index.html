@@ -42,17 +42,17 @@
         }
 
         .landing-logo {
-            max-width: 280px;[cite: 1]
+            max-width: 280px; /*[cite: 1] */
             width: 100%;
             height: auto;
             margin-bottom: 25px;
         }
 
         .landing-tagline {
-            font-size: 1.25rem;[cite: 1]
-            font-weight: 400;[cite: 1]
-            color: #555;[cite: 1]
-            letter-spacing: 0.5px;[cite: 1]
+            font-size: 1.25rem; /*[cite: 1] */
+            font-weight: 400; /*[cite: 1] */
+            color: #555; /*[cite: 1] */
+            letter-spacing: 0.5px; /*[cite: 1] */
             margin-bottom: 30px;
         }
 
@@ -76,19 +76,18 @@
         .landing-footer {
             position: absolute;
             bottom: 30px;
-            font-size: 0.75rem;[cite: 1]
-            color: #aaa;[cite: 1]
-            text-transform: uppercase;[cite: 1]
-            letter-spacing: 1px;[cite: 1]
+            font-size: 0.75rem; /*[cite: 1] */
+            color: #aaa; /*[cite: 1] */
+            text-transform: uppercase; /*[cite: 1] */
+            letter-spacing: 1px; /*[cite: 1] */
             line-height: 1.6;
         }
 
-        /* --- APP LEDGER VIEW (Hidden by default) --- */
+        /* --- APP LEDGER VIEW --- */
         #appView {
             display: none;
         }
 
-        /* App Header Layout: Logo on Upper-Left */
         header {
             background: #ffffff;
             border-bottom: 1px solid #e2e8f0;
@@ -262,6 +261,22 @@
             background: #cbd5e1;
         }
 
+        .btn-solution {
+            background: #0369a1;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .btn-solution:hover {
+            background: #0284c7;
+        }
+
         .problem-card {
             background: #ffffff;
             border: 1px solid var(--border-color);
@@ -323,6 +338,25 @@
             font-weight: 600;
         }
 
+        /* Proposal Form Modal / Box inside Card */
+        .proposal-form-container {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .proposal-item {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 8px;
+            font-size: 11px;
+        }
+
         .pro-box {
             background: #fffbeb;
             border: 1px solid #fcd34d;
@@ -376,10 +410,10 @@
         .footer {
             text-align: center;
             margin: 40px 0;
-            font-size: 0.75rem;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.75rem; /*[cite: 1] */
+            color: #aaa; /*[cite: 1] */
+            text-transform: uppercase; /*[cite: 1] */
+            letter-spacing: 1px; /*[cite: 1] */
             line-height: 1.6;
         }
     </style>
@@ -614,6 +648,21 @@
                 count++;
                 const card = document.createElement('div');
                 card.className = 'problem-card';
+                
+                let proposalsHtml = '';
+                if (item.proposals) {
+                    Object.values(item.proposals).forEach(p => {
+                        proposalsHtml += `
+                            <div class="proposal-item">
+                                <strong>Proposal (${p.exchangeType}):</strong> ${p.solutionText}<br>
+                                <em>Steps:</em> ${p.steps || 'N/A'}<br>
+                                <em>Tools:</em> ${p.tools || 'None'} | <em>Skills:</em> ${p.skills || 'None'} | <em>Term:</em> ${p.offerTerm}<br>
+                                <span style="color:#0369a1;">Proposed by: ${p.solverContact}</span>
+                            </div>
+                        `;
+                    });
+                }
+
                 card.innerHTML = `
                     <div class="problem-header">
                         <h4>${item.title}</h4>
@@ -624,6 +673,52 @@
                     <div class="problem-footer">
                         <span class="solver-tag">contributor: ${item.contact || 'anonymous'}</span>
                     </div>
+                    ${item.status === 'seeking solution' ? `<button class="btn-solution" onclick="toggleProposalForm('${key}')">propose a solution</button>` : ''}
+                    
+                    <div id="proposalForm_${key}" class="proposal-form-container">
+                        <h4 style="margin:0 0 8px 0; font-size:12px; color:#0369a1;">propose solution details</h4>
+                        <div class="form-group">
+                            <label>proposal type / exchange model</label>
+                            <select id="p_type_${key}">
+                                <option>for a fee</option>
+                                <option>in exchange for a thing (barter)</option>
+                                <option>in exchange for money</option>
+                                <option>in exchange for something to do (favor)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>your solution summary</label>
+                            <input type="text" id="p_solution_${key}" placeholder="briefly describe your solution...">
+                        </div>
+                        <div class="form-group">
+                            <label>detailed step-by-step process</label>
+                            <textarea id="p_steps_${key}" rows="2" placeholder="step 1, step 2..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>equipment / tools available</label>
+                            <input type="text" id="p_tools_${key}" placeholder="e.g., diagnostic kit, laptop...">
+                        </div>
+                        <div class="form-group">
+                            <label>your skills / qualifications</label>
+                            <input type="text" id="p_skills_${key}" placeholder="e.g., certified technician...">
+                        </div>
+                        <div class="form-group">
+                            <label>offer term</label>
+                            <select id="p_term_${key}">
+                                <option>limited time offer</option>
+                                <option>as is</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>your contact number / name</label>
+                            <input type="text" id="p_contact_${key}" placeholder="name / +63 917 xxx xxxx">
+                        </div>
+                        <button class="btn-primary" style="padding:8px; font-size:12px;" onclick="submitProposal('${key}')">submit solution proposal</button>
+                    </div>
+
+                    <div style="margin-top:8px;">
+                        ${proposalsHtml}
+                    </div>
                 `;
                 container.appendChild(card);
             });
@@ -631,6 +726,44 @@
             if (count === 0) {
                 container.innerHTML = `<p style="color: #94a3b8; font-size: 12px; text-align: center; padding: 20px;">no matching problems or solutions found.</p>`;
             }
+        }
+
+        function toggleProposalForm(key) {
+            const formBox = document.getElementById(`proposalForm_${key}`);
+            if (formBox.style.display === 'block') {
+                formBox.style.display = 'none';
+            } else {
+                formBox.style.display = 'block';
+            }
+        }
+
+        function submitProposal(key) {
+            const exchangeType = document.getElementById(`p_type_${key}`).value;
+            const solutionText = document.getElementById(`p_solution_${key}`).value;
+            const steps = document.getElementById(`p_steps_${key}`).value;
+            const tools = document.getElementById(`p_tools_${key}`).value;
+            const skills = document.getElementById(`p_skills_${key}`).value;
+            const offerTerm = document.getElementById(`p_term_${key}`).value;
+            const solverContact = document.getElementById(`p_contact_${key}`).value;
+
+            if (!solutionText || !solverContact) {
+                alert("please provide your solution summary and contact info.");
+                return;
+            }
+
+            db.ref(`bizave_problems/${key}/proposals`).push({
+                exchangeType,
+                solutionText,
+                steps,
+                tools,
+                skills,
+                offerTerm,
+                solverContact,
+                timestamp: Date.now()
+            });
+
+            alert("Solution proposal successfully published to the ledger!");
+            document.getElementById(`proposalForm_${key}`).style.display = 'none';
         }
 
         function filterFeed() {
