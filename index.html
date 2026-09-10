@@ -43,10 +43,10 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             background-color: var(--surface);
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
             box-sizing: border-box;
             position: relative;
         }
@@ -67,35 +67,139 @@
             margin-bottom: 40px;
         }
 
-        .btn-enter {
+        /* New Product Description & Pricing Card */
+        .landing-product-card {
             background: var(--surface);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: left;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .landing-product-card h2 {
+            margin: 0 0 20px 0;
+            font-size: 18px;
             color: var(--brand-primary);
-            border: 1px solid var(--border-focus);
-            padding: 12px 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 3px solid var(--brand-action);
+            padding-bottom: 12px;
+            display: inline-block;
+        }
+
+        .landing-product-card p {
+            margin: 0 0 16px 0;
+            font-size: 14px;
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        .landing-pricing {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        @media (max-width: 600px) {
+            .landing-pricing {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .price-tier {
+            padding: 24px;
+            background: var(--background);
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .price-tier:hover {
+            transform: translateY(-2px);
+        }
+
+        .price-tier.premium {
+            background: var(--premium-bg);
+            border-color: var(--premium-border);
+            box-shadow: 0 4px 6px rgba(217, 119, 6, 0.1);
+        }
+
+        .price-tier strong {
+            display: block;
+            font-size: 14px;
+            color: var(--brand-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .price-tier.premium strong {
+            color: var(--premium-text);
+        }
+
+        .price-tier span.features {
+            display: block;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            height: 34px; /* Align heights */
+        }
+
+        .price-tag {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--brand-action);
+            display: block;
+        }
+
+        .price-tier.premium .price-tag {
+            color: #b45309;
+        }
+
+        .price-tag small {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-enter {
+            background: var(--brand-primary);
+            color: var(--surface);
+            border: none;
+            padding: 16px 40px;
             border-radius: 4px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 60px;
         }
 
         .btn-enter:hover {
-            background: var(--brand-primary);
-            color: var(--surface);
-            border-color: var(--brand-primary);
+            background: var(--brand-action);
+            transform: translateY(-1px);
         }
 
         .landing-footer {
-            position: absolute;
-            bottom: 40px;
             font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1.5px;
             line-height: 1.8;
+            padding-bottom: 20px;
         }
 
         /* --- APP LEDGER VIEW --- */
@@ -444,12 +548,24 @@
         }
 
         .pro-box h4 {
-            margin: 0 0 8px 0;
-            font-size: 12px;
+            margin: 0 0 12px 0;
+            font-size: 13px;
             color: var(--premium-text);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pro-box h4 span {
+            background: var(--premium-text);
+            color: var(--surface);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            letter-spacing: 1px;
         }
 
         .pro-box p {
@@ -507,11 +623,29 @@
 
     <!-- 1. EXECUTIVE LANDING SCREEN -->
     <div id="landingView">
-        <div class="container" style="max-width: 600px;">
-            <img src="logo.png" alt="Bizave Logo" class="landing-logo">
-            <div class="landing-tagline">Life's tool at your hands.</div>
-            <button class="btn-enter" onclick="enterApp()">Authenticate & Enter</button>
+        <img src="logo.png" alt="Bizave Logo" class="landing-logo">
+        <div class="landing-tagline">Life's tool at your hands.</div>
+        
+        <div class="landing-product-card">
+            <h2>The Enterprise Problem-Solving Ledger</h2>
+            <p><strong>Bizave</strong> is a cloud-based, peer-to-peer data utility and operational ledger designed to bridge the gap between complex challenges and professional solutions. Engineered with a real-time database architecture, the software empowers users to log technical protocols, classify operational parameters, and broadcast them to a secure global network.</p>
+            <p>Beyond standard data management, Bizave functions as an interactive skills marketplace. It allows executing nodes (solvers) to draft structured resolution proposals, negotiate customizable exchange mechanisms, and outline detailed execution methodologies. Featuring dynamic search filtering, client-side submission authorizations, and CSV dataset export capabilities, Bizave delivers an institutional-grade workspace for tracking, managing, and resolving real-world challenges.</p>
+            
+            <div class="landing-pricing">
+                <div class="price-tier">
+                    <strong>Standard License</strong>
+                    <span class="features">5 Network Submissions / Day<br>Basic Protocol Access</span>
+                    <span class="price-tag">Free <small>/ active</small></span>
+                </div>
+                <div class="price-tier premium">
+                    <strong>Enterprise License</strong>
+                    <span class="features">Limitless Protocol Submissions<br>Advanced Analytics & Export</span>
+                    <span class="price-tag">₱499 <small>/ monthly</small></span>
+                </div>
+            </div>
         </div>
+
+        <button class="btn-enter" onclick="enterApp()">Authenticate & Enter Workspace</button>
 
         <div class="landing-footer">
             &copy; 2026 Bizave. All Rights Reserved.<br>
@@ -578,8 +712,8 @@
 
                     <!-- MONETIZATION / ACTIVATION MODULE -->
                     <div class="pro-box">
-                        <h4>Enterprise Activation</h4>
-                        <p>Standard access is restricted to 5 network submissions daily. To lift protocol restrictions, contact the administration desk at <strong>0917 551 9510</strong> for a clearance code.</p>
+                        <h4>Enterprise Activation <span>₱499 / MO</span></h4>
+                        <p>Standard access is restricted to 5 network submissions daily. Upgrade to the Enterprise License for <strong>₱499 monthly</strong> to unlock limitless protocol submissions and advanced ledger capabilities. Contact the administration desk at <strong>0917 551 9510</strong> to process your subscription and receive your clearance code.</p>
                         <div class="form-group" style="margin-bottom: 12px;">
                             <input type="text" id="activationKeyInput" placeholder="Enter clearance code...">
                         </div>
@@ -711,7 +845,7 @@
             if (isLimitlessActive) return true;
             const record = getDailyUsage();
             if (record.count >= 5) {
-                alert("Protocol Notice: Daily authorized submission limit reached. Please contact administration at 0917 551 9510 to process a clearance code.");
+                alert("Protocol Notice: Daily authorized submission limit reached. Please upgrade to the ₱499/month Enterprise License or contact administration at 0917 551 9510.");
                 return false;
             }
             return true;
